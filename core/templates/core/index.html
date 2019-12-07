@@ -1,0 +1,415 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>داشبورد مدیریت</title>
+    <meta charset="utf-8">
+    <meta content="ie=edge" http-equiv="x-ua-compatible">
+    <meta content="template language" name="keywords">
+    <meta content="Tamerlan Soziev" name="author">
+    <meta content="Admin dashboard html template" name="description">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <link href="favicon.png" rel="shortcut icon">
+    <link href="apple-touch-icon.png" rel="apple-touch-icon">
+    <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500" rel="stylesheet" type="text/css">
+    <link href="{% static '/bower_components/select2/dist/css/select2.min.css'%}" rel="stylesheet">
+    <link href="{% static '/bower_components/bootstrap-daterangepicker/daterangepicker.css'%}" rel="stylesheet">
+    {% comment %} <link href="{% static 'jquery.ui.datepicker.jalali/themes/base/jquery-ui.min.css' %}" rel="stylesheet"> {% endcomment %}
+    <link href="{% static '/bower_components/dropzone/dist/dropzone.css'%}" rel="stylesheet">
+    <link href="{% static '/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css'%}" rel="stylesheet">
+    <link href="{% static '/bower_components/fullcalendar/dist/fullcalendar.min.css'%}" rel="stylesheet">
+    <link href="{% static '/bower_components/perfect-scrollbar/css/perfect-scrollbar.min.css'%}" rel="stylesheet">
+    <link href="{% static '/bower_components/slick-carousel/slick/slick.css'%}" rel="stylesheet">
+    <link href="{% static 'css/main.css'%}" rel="stylesheet">
+    {% comment %} <link href='https://api.mapbox.com/mapbox-gl-js/v1.3.1/mapbox-gl.css' rel='stylesheet' /> {% endcomment %}
+  </head>
+  <body class="menu-position-side menu-side-left full-screen with-content-panel">
+
+
+    <div class="all-wrapper with-side-panel solid-bg-all">
+      <div class="layout-w" stylewidth=>
+        <div class="menu-w color-scheme-light color-style-transparent menu-position-side menu-side-left menu-layout-compact sub-menu-style-over sub-menu-color-bright selected-menu-color-light menu-activated-on-hover menu-has-selected-link">
+          <div class="logo-w">
+            <a class="logo" href="{%url 'core:index'%}">
+              <div class="logo-element"></div>
+              <div class="logo-label">
+                مدیر
+              </div>
+            </a>
+          </div>
+          
+         
+          <ul class="main-menu">
+            <li class="sub-header">
+              <span>لایه ها</span>
+            </li>
+            <li class="selected has-sub-menu">
+                <a href="#">          
+                <div class="icon-w">
+                  <div class="os-icon os-icon-layout"></div>
+                </div>
+                <span>داشبورد</span></a>
+              <div class="sub-menu-w" style="right: 100%;">
+                <div class="sub-menu-header">
+                  داشبورد
+                </div>
+                <div class="sub-menu-icon">
+                  <i class="os-icon os-icon-layout"></i>
+                </div>
+                <div class="sub-menu-i">
+                  <ul class="sub-menu">
+                    <li>
+                      <a href="{%url 'core:index'%}">صفحه اصلی</a>
+                    </li>
+                    
+                    <li>
+                      <a href="{% url 'core:unit_create' %}" class="top-menu">
+                      <span class="glyphicon glyphicon-plus"></span>ثبت منطقه</a>
+                    </li>                       
+                    <li>
+                      <a href="{% url 'core:melk_insert' %}" class="top-menu"> 
+                      <span class="glyphicon glyphicon-plus"></span>ثبت  ملک</a>
+                    </li>  
+                    <li>
+                      <a href="{% url 'core:melk_update' %}" class="top-menu"> 
+                      <span class="glyphicon glyphicon-plus"></span>ویرایش ملک</a>
+                    </li>                        
+                  </ul>
+                </div>
+              </div>
+            </li>
+              <div class="sub-menu-w">
+                <div class="sub-menu-header">
+                  داشبورد داخلی
+                </div>
+                <div class="sub-menu-icon">
+                  <i class="os-icon os-icon-layout"></i>
+                </div>
+                
+              </div>
+            </li>
+            <li class=" has-sub-menu">
+              <a href="layouts_menu_top_image.html">
+                <div class="icon-w">
+                  <div class="os-icon os-icon-layers"></div>
+                </div>
+                <span>قالب های منو</span></a>
+              <div class="sub-menu-w">
+                <div class="sub-menu-header">
+                  قالب های منو
+                </div>
+                <div class="sub-menu-icon">
+                  <i class="os-icon os-icon-layers"></i>
+                </div>
+                <div class="sub-menu-i">
+                  <ul class="sub-menu">
+                    <li>
+                      <a href="#">ثبت ملک</a>
+                    </li>
+                    <li>
+                      <a href="layouts_menu_side_full_dark.html">منو جانبی تاریک</a>
+                    </li>
+                    
+                    </ul>
+             
+                    
+                </div>
+              </div>
+            </li>
+            <li class="sub-header">
+              <span>تنظیمات</span>
+            </li>
+            <li class=" has-sub-menu">
+              <a href="apps_bank.html">
+                <div class="icon-w">
+                  <div class="os-icon os-icon-package"></div>
+                </div>
+                <span>برنامه های کاربردی</span></a>
+              <div class="sub-menu-w">
+                <div class="sub-menu-header">
+                  برنامه کاربردی
+                </div>
+                <div class="sub-menu-icon">
+                  <i class="os-icon os-icon-package"></i>
+                </div>
+                
+              </div>
+            </li>
+            
+
+            <li class="sub-header">
+              <span>المان ها</span>
+            </li>
+            
+            <li class=" has-sub-menu">
+              <a href="#">
+                <div class="icon-w">
+                  <div class="os-icon os-icon-users"></div>
+                </div>
+                <span>کاربران</span></a>
+              <div class="sub-menu-w">
+                <div class="sub-menu-header">
+                  کاربر ها
+                </div>
+                <div class="sub-menu-icon">
+                  <i class="os-icon os-icon-users"></i>
+                </div>
+                <div class="sub-menu-i">
+                  <ul class="sub-menu">
+                    <li>
+                      <a href="#">پروفایل بزرگ</a>
+                    </li>
+                    <li>
+                      <a href="users_profile_small.html">پروفایل کوچک</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </li>
+            <li class=" has-sub-menu">
+              <a href="#">
+                <div class="icon-w">
+                  <div class="os-icon os-icon-edit-32"></div>
+                </div>
+                <span>فرم ها</span></a>
+              <div class="sub-menu-w">
+                <div class="sub-menu-header">
+                  فرم ها
+                </div>
+                <div class="sub-menu-icon">
+                  <i class="os-icon os-icon-edit-32"></i>
+                </div>
+                <div class="sub-menu-i">
+                  <ul class="sub-menu">
+                    <li>
+                      <a href="forms_regular.html">فرم های منظم</a>
+                    </li>
+                    <li>
+                      <a href="forms_validation.html">فرم های تایید شده</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </li>
+            <li class=" has-sub-menu">
+              <a href="#">
+                <div class="icon-w">
+                  <div class="os-icon os-icon-grid"></div>
+                </div>
+                <span>جداول</span></a>
+              <div class="sub-menu-w">
+                <div class="sub-menu-header">
+                 جداول
+                </div>
+                <div class="sub-menu-icon">
+                  <i class="os-icon os-icon-grid"></i>
+                </div>
+                <div class="sub-menu-i">
+                  <ul class="sub-menu">
+                    
+                    <li>
+                      <a href="tables_datatables.html">جداول داده</a>
+                    </li>
+                    <li>
+                      <a href="tables_editable.html">ویرایش جداول</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </li>
+            
+          </ul>
+        </div>
+        <!--------------------
+        END - Main Menu
+        -------------------->
+        <div class="content-w">
+          <!--------------------
+          START - Top Bar
+          -------------------->
+          <div class="top-bar color-scheme-transparent">
+            <!--------------------
+            START - Top Menu Controls
+            -------------------->
+            
+            <div class="logged-user-w avatar-inline">
+            
+            <div class="logged-user-i">
+              <div class="avatar-w">
+                <img alt="" src="{% static 'media/avatar1.jpg' %}">
+              </div>
+              <div class="logged-user-info-w" >
+                <div class="logged-user-name">
+                
+                 {{ user.first_name }} {{ user.last_name }}
+                </div>
+                <div class="logged-user-role">
+                  مدیریت
+                </div>
+              </div>
+              <div class="logged-user-toggler-arrow">
+                <div class="os-icon os-icon-chevron-down"></div>
+              </div>
+              <div class="logged-user-menu color-style-bright" >
+                <div class="logged-user-avatar-info">
+                  <div class="avatar-w">
+                    {% comment %} <img alt="" src="{{user.profile.image.url}}"> {% endcomment %}
+                    <img alt="" src="{% static 'media/avatar1.jpg' %}">
+                  </div>
+                  <div class="logged-user-info-w">
+                    <div class="logged-user-name">
+                      {{ user.first_name }} {{ user.last_name }}
+                    </div>
+                    <div class="logged-user-role">
+                     مدیریت 
+                    </div>
+                  </div>
+                </div>
+                <div class="bg-icon">
+                  <i class="os-icon os-icon-wallet-loaded"></i>
+                </div>
+                <ul>
+                  <li>
+                    <a href="{% url 'core:register'%}"><i class="os-icon os-icon-mail-01"></i><span>ثبت نام</span></a> 
+                  </li>
+                  <li>
+                    <a href="{% url 'core:login'%}"><i class="os-icon os-icon-mail-01"></i><span>ورود</span></a> 
+                  </li>
+                  <li>
+                    <a href="#"><i class="os-icon os-icon-user-male-circle2"></i><span>پروفایل</span></a> 
+                  </li>
+                  
+                  <li>
+                    <a href="#"><i class="os-icon os-icon-others-43"></i><span>جستجو</span></a>
+                  </li>
+                  <li>
+                    <a href="{% url 'core:logout'%}"><i class="os-icon os-icon-signs-11"></i><span>خروج</span></a>
+                  </li>
+                </ul>
+              </div> 
+            </div>
+          </div>
+        </div>
+           {% comment %}<div class="top-menu-controls" style=" width: 100%;"> 
+              <div class="element-search autosuggest-search-activator">
+
+                <input placeholder="متن خود را جستجو کنید..." type="text">
+              </div>
+              <!--------------------
+              START - User avatar and menu in secondary top menu
+              -------------------->
+              <div class="logged-user-w">
+                <div class="logged-user-i">
+                  <div class="avatar-w">
+                    <img alt="" src="{{user.profile.image.url}}">
+                  </div>
+                  <div class="logged-user-menu color-style-bright" >
+                    <div class="logged-user-avatar-info">
+                      <div class="avatar-w">
+                        <img alt="" src="{{user.profile.image.url}}">
+                      </div>
+                      <div class="logged-user-info-w" >
+                        <div class="logged-user-name">
+                          {{ user.first_name }} {{ user.last_name }}
+                        </div>
+                        <div class="logged-user-role">
+                         مدیر سایت
+                        </div>
+                      </div>
+                    </div>
+                    <div class="bg-icon">
+                      <i class="os-icon os-icon-wallet-loaded"></i>
+                    </div>
+                    <ul>
+                      <li>
+                        <a href="apps_email.html"><i class="os-icon os-icon-mail-01"></i><span>ایمیل وارده</span></a>
+                      </li>
+                      <li>
+                        <a href="#"><i class="os-icon os-icon-user-male-circle2"></i><span>پروفایل</span></a>
+                      </li>
+                      
+                      <li>
+                        <a href="{% url 'core:unit_search' %}"><i class="os-icon os-icon-others-43"></i><span>جستجو</span></a>
+                      </li>
+                      <li>
+                        <a href="{% url 'core:logout'%}"><i class="os-icon os-icon-signs-11"></i><span>خروج</span></a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <!--------------------
+              END - User avatar and menu in secondary top menu
+              -------------------->
+            </div>
+            <!--------------------
+            END - Top Menu Controls
+            -------------------->
+          
+          </div> {% endcomment %}
+          <!--------------------
+          شروع محتوای اصلی سایت
+          -------------------->
+          <div>
+
+            {%block content%}
+
+            {% endblock %}
+   
+
+            
+
+           </div> 
+
+
+          </div>
+        </div>
+      </div>
+      
+    </div>
+
+<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.39.1/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.39.1/mapbox-gl.css' rel='stylesheet' />
+    <script src='https://api.mapbox.com/mapbox-gl-js/v1.3.1/mapbox-gl.js'></script>
+    <script src="{% static 'bower_components/popper.js/dist/umd/popper.min.js'%}"></script>
+    <script src="{% static 'bower_components/jquery/dist/jquery.min.js'%}"></script>
+    <script src="{% static 'bower_components/moment/moment.js'%}"></script>
+    <script src="{% static 'bower_components/chart.js/dist/Chart.min.js'%}"></script>
+    <script src="{% static 'bower_components/select2/dist/js/select2.full.min.js'%}"></script>
+    <script src="{% static 'bower_components/jquery-bar-rating/dist/jquery.barrating.min.js'%}"></script>
+    <script src="{% static 'bower_components/ckeditor/ckeditor.js'%}"></script>
+    <script src="{% static 'bower_components/bootstrap-validator/dist/validator.min.js'%}"></script>
+    <script src="{% static 'bower_components/bootstrap-daterangepicker/daterangepicker.js'%}"></script>
+    <script src="{% static 'bower_components/ion.rangeSlider/js/ion.rangeSlider.min.js'%}"></script>
+    <script src="{% static 'bower_components/dropzone/dist/dropzone.js'%}"></script>
+    <script src="{% static 'bower_components/editable-table/mindmup-editabletable.js'%}"></script>
+    <script src="{% static 'bower_components/datatables.net/js/jquery.dataTables.min.js'%}"></script>
+    <script src="{% static 'bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js'%}"></script>
+    <script src="{% static 'bower_components/fullcalendar/dist/fullcalendar.min.js'%}"></script>
+    <script src="{% static 'bower_components/perfect-scrollbar/js/perfect-scrollbar.jquery.min.js'%}"></script>
+    <script src="{% static 'bower_components/tether/dist/js/tether.min.js'%}"></script>
+    <script src="{% static 'bower_components/slick-carousel/slick/slick.min.js'%}"></script>
+    <script src="{% static 'bower_components/bootstrap/js/dist/util.js'%}"></script>
+    <script src="{% static 'bower_components/bootstrap/js/dist/alert.js'%}"></script>
+    <script src="{% static 'bower_components/bootstrap/js/dist/button.js'%}"></script>
+    <script src="{% static 'bower_components/bootstrap/js/dist/carousel.js'%}"></script>
+    <script src="{% static 'bower_components/bootstrap/js/dist/collapse.js'%}"></script>
+    <script src="{% static 'bower_components/bootstrap/js/dist/dropdown.js'%}"></script>
+    <script src="{% static 'bower_components/bootstrap/js/dist/modal.js'%}"></script>
+    <script src="{% static 'bower_components/bootstrap/js/dist/tab.js'%}"></script>
+    <script src="{% static 'bower_components/bootstrap/js/dist/tooltip.js'%}"></script>
+    <script src="{% static 'bower_components/bootstrap/js/dist/popover.js'%}"></script>
+    <script src="{% static 'js/demo_customizer.js'%}"></script>
+    <script src="{% static 'js/main.js'%}"></script>
+    {% comment %} <script src="{% static 'js/django_jalali.min.js' %}"></script> {% endcomment %}
+    {% comment %} <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','{% static 'js/analytics.js'%}','ga');
+      
+      ga('create', 'UA-XXXXXXX-9', 'auto');
+      ga('send', 'pageview');
+    </script> {% endcomment %}
+  </body>
+  </html>

@@ -1,0 +1,144 @@
+{% extends 'core/index.html' %}
+{%block content%}
+{% load static %}
+{% load bootstrap4 %}
+{%load crispy_forms_tags%} 
+
+<div class="col-lg-8">
+                        <div class="element-wrapper">
+                    
+                            <div class="element-box">
+                        
+                                <div class="element-wrapper">
+                                    <div class="element-box-tp">
+                                        <h5 class="form-header">
+                                        لیست املاک
+                                        </h5>
+                                        <div class="element-box-tp">
+                                        <!--------------------
+                                        START - Controls Above Table
+                                        -------------------->
+                                        {% comment %} <div class="controls-above-table">
+                                            <div class="row">
+                                            <div class="col-sm-6">
+                                                <form class="form-inline justify-content-sm-end">
+                                                <input class="form-control form-control-sm rounded bright" placeholder="جستجو" type="text">              
+                                                </form>
+                                            </div>
+                                            </div>
+                                        </div> {% endcomment %}
+                                        <!--------------------
+                                        END - Controls Above Table
+                                        ------------------          --><!--------------------
+                                        START - Table with actions
+                                        ------------------  -->
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered table-lg table-v2 table-striped">
+                                            <thead>
+                                                    <tr>
+                                                    <th>
+                                                    </th>
+
+                                                    <th>
+                                                        <h6>
+                                                        کد ملک
+                                                        </h6>
+                                                    </th>
+                                                    <th>
+                                                        <h6>
+                                                        نام ملک
+                                                        </h6>
+                                                    </th>
+                                                    <th>
+                                                        <h6>
+                                                        نام منطقه
+                                                        </h6>
+                                                    </th>
+                                                    <th>
+                                                        <h6>
+                                                        متولی ملک
+                                                        </h6>
+                                                    </th>
+                                                    <th>
+                                                        <h6>
+                                                        عملیات
+                                                        </h6>
+                                                    </th>
+                                                    </tr>
+                                            </thead>
+                                            <tbody >               
+                                               
+                                                    {%for Sabt in posts %}
+                                                        
+                                                        <tr>
+                                                            <td class="text-center">
+                                                                <input class="form-control" type="checkbox">
+                                                            </td>
+                                                    
+                                                            <td>
+                                                                {{ Sabt.melk_name }}
+                                                            </td>                    
+                                                            <td>
+                                                                {{ Sabt.khayer_name }}
+                                                            </td>
+                                                            <td>
+                                                                {{ Sabt.sanad_asli }}
+                                                            </td>                    
+                                                            <td>
+                                                                {{ Sabt.sanad_farye }}
+                                                            </td>
+                                                            <td class="row-actions">
+                                                                <a href="{% url 'core:melk_update'  %}"><i class="os-icon os-icon-ui-49"></i></a>
+                                                                <a class="danger" href="{% url 'core:melk_delete' Sabt.id %}"><i class="os-icon os-icon-ui-15"></i></a>
+                                                            </td>                      
+                                                        
+                                                        </tr>
+                                                    {% endfor %}              
+                                                
+                                                        
+                                            </tbody>
+                                            </table>
+                                        </div> 
+                                        
+                                            {%if posts.has_other_pages %}
+                                                <ul class="pagination">
+                                                    {% if posts.has_previous %}
+                                                        <li class="page-item">
+                                                        <a href="?page={{posts.previous_page_number}}" class="page-link">قبلی</a>
+                                                        </li>
+                                                    {% else %}
+                                                        <li class="page-item disabled"><span>قبلی</span></li>
+                                                    {% endif %}
+                                                    {% for p in posts.paginator.page_range %} 
+                                                        {% if posts.number == p %}
+                                                            <li class="page-item active">
+                                                            <a href="?page={{p}}" class="page-link">{{p}}</a>
+                                                            </li>
+                                                        {% else %}
+                                                            <li class="page-item">
+                                                                <a href="?page={{p}}" class="page-link">{{p}}</a>
+                                                            </li>
+                                                        {%endif%} 
+                                                    {%endfor%}
+                                                    {% if posts.has_next %}
+                                                        <li class="page-item">
+                                                            <a href="?page={{posts.next_page_number}}" class="page-link">بعدی</a>
+                                                        </li>
+                                                    {%else%}
+                                                        <li class="page-item disabled"><span>بعدی</span></li>
+                                                    
+                                                    {%endif%}                                        
+                                                </ul>
+                                            {%endif%}
+                                        </div>                                                         
+                                    </div>
+                                </div> 
+                        
+                    </div>       
+                                    
+                
+             
+ 
+        
+    </div>
+{% endblock %}

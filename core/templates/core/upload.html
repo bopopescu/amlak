@@ -1,0 +1,10 @@
+{% comment %} {% extends "core/index.html" %}
+{%block content%} {% endcomment %}
+
+<form method="post" enctype="multipart/form-data" >
+    {% csrf_token %}
+    <input type="file" name="myfile">
+    <button type="submit">بارگزاری</button>
+</form>
+
+{% comment %} {% endblock %} {% endcomment %}
