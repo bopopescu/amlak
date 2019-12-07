@@ -5,244 +5,218 @@
 {%load crispy_forms_tags%}
 
 <div class="content-i">
-  <div class="content-box">
-  <div class="element-wrapper">
-  <div class="element-box">
-    {% include "core/message.html" %}
-        
-    <div class="steps-w">
-        <div class="step-triggers">
-          <a class="step-trigger active" href="#stepContent1">ثبت مشخصات ملک</a>
-          <a class="step-trigger" href="#stepContent2">مشخصات سندی ملک</a>
-          <a class="step-trigger" href="#stepContent3">موقعیت جغرافیایی</a>
-        </div>
-        <div class="step-contents">
-        <form action="{% url 'core:melk_insert' %}" method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-          <div class="step-content active" id="stepContent1">
-            <div class="row">
-              <div class="col-sm-6">
-                <div class="form-group">
-                  <label for=""> نام ملک</label>
-                  {{form.melk_name}}
-                  {% comment %} <input class="form-control" placeholder="نام ملک" type="text"> {% endcomment %}
+    <div class="element-wrapper">
+        <div class="element-box">
+            {% include "core/message.html" %}
+            <div class="steps-w">
+                <div class="step-triggers">
+                    <a class="step-trigger active" href="#stepContent1">ثبت مشخصات ملک</a>
+                    <a class="step-trigger" href="#stepContent2">مشخصات سندی ملک</a>
+                    <a class="step-trigger" href="#stepContent3">موقعیت جغرافیایی</a>
                 </div>
-              </div>
-              <div class="col-sm-6">
-                <div class="form-group">
-                  <label for="">نام واگذار کننده</label>
-                  {{form.khayer_name}}
-                  {% comment %} <input class="form-control" placeholder="نام واگذار کننده" type="text"> {% endcomment %}
-                </div>
-              </div>              
-            </div>
-            <div class="row">
-                <div class="col-sm-6">
-                  <div class="form-group">
-                    <label for="">شماره سند اصلی</label>
-                    {{form.sanad_asli}}
-                    {% comment %} <input class="form-control" placeholder="شماره سند اصلی" type="text"> {% endcomment %}
-                  </div>
-                </div>
-                <div class="col-sm-6">
-                  <div class="form-group">
-                    <label for=""> شماره سند فرعی</label>
-                    {{form.sanad_farye}}
-                    {% comment %} <input class="form-control" placeholder="شماره سند فرعی" type="text"> {% endcomment %}
-                  </div>
-                </div>              
-            </div>
-            <div class="row">
-              <div class="col-sm-6">
-                  <div class="form-group">
-                    <label for="">نوع سند واگذاری</label>
-                    {{form.sanad_type}}
-                    
-                  </div>
-              </div>
-              <div class="col-sm-6">
-                  <div class="form-group">
-                    <label for=""> وضعیت کنونی ملک</label>
-                    {{form.melk_state}}
-                    
-                  </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-sm-6">
-                <div class="form-group">
-                  <label for="">نوع کاربری</label>
-                  {{form.melk_karbari}}
-                  
-                </div>
-              </div>
-              <div class="col-sm-6">
-                <div class="form-group">
-                  <label for=""> متولی ملک</label>
-                  {{form.melk_motavali}}
-                 
-                </div>
-              </div>
-            </div>
-            <div class="form-buttons-w text-right">
-                <a class="btn btn-primary step-trigger-btn" href="#stepContent2"> ادامه</a>
-            </div>
-          </div>
-          
-         
-          <div class="step-content" id="stepContent2">
-            <div class="row">
-              <div class="col-sm-6">
-                <div class="date-input">
-                  <label for=""> سال واگذاری ملک</label>
-                  {{form.melk_year}}
-                 
-                  {% comment %} <input class="form-control" placeholder="سال واگذاری" type="text"> {% endcomment %}
-                </div>
-              </div>
-              <div class="col-sm-6">
-                <div class="form-group">
-                  <label for="">ارزش ریالی ملک</label>
-                  {{form.melk_price}} 
-                  {% comment %} <input class="form-control" placeholder="ارزش ریالی" type="number"> {% endcomment %}
-                </div>
-              </div>
-            </div>
+                <div class="step-contents">
+                    <form action="{% url 'core:melk_insert' %}" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="step-content active" id="stepContent1">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for=""> نام ملک</label>
+                                        {{form.melk_name}}
+                                        {% comment %} <input class="form-control" placeholder="نام ملک" type="text"> {% endcomment %}
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="">نام واگذار کننده</label>
+                                        {{form.khayer_name}}
+                                        {% comment %} <input class="form-control" placeholder="نام واگذار کننده" type="text"> {% endcomment %}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="">شماره سند اصلی</label>
+                                        {{form.sanad_asli}}
+                                        {% comment %} <input class="form-control" placeholder="شماره سند اصلی" type="text"> {% endcomment %}
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for=""> شماره سند فرعی</label>
+                                        {{form.sanad_farye}}
+                                        {% comment %} <input class="form-control" placeholder="شماره سند فرعی" type="text"> {% endcomment %}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="">نوع سند واگذاری</label>
+                                        {{form.sanad_type}}
 
-            <div class="row">
-              <div class="col-sm-6">
-                <div class="form-group">
-                  <label for=""> عرصه ملک</label>
-                  {{form.melk_arseh}}
-                  {% comment %} <input class="form-control" placeholder="عرصه ملک" type="text"> {% endcomment %}
-                </div>
-              </div>
-              <div class="col-sm-6">
-                <div class="form-group">
-                  <label for="">اعیان ملک</label>
-                  {{form.melk_ayan}}
-                  {% comment %} <input class="form-control" placeholder="اعیان ملک" type="text"> {% endcomment %}
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-sm-12">
-                <div class="form-group">
-                  <label>   توضیحات سند</label>
-                  {{form.melk_comment}}
-                  {% comment %} <textarea class="form-control" rows="3"></textarea> {% endcomment %}
-                </div>
-              </div>
-            </div>  
-                    
-            {% comment %} <div class="element-box">
-                  <h5 class="form-header"> {% endcomment %}
-            <div class="row">
-              <div class="col-sm-6">
-                <div class="form-group">
-                  <label>   بارگزاری تصویر سند</label>
-                                   
-                  {% comment %} <input type="file" name="myfile"> {% endcomment %}
-                  {{form.melk_pic}}
-                </div>
-                <div class="col-sm-6">
-                <div class="form-group">
-                  {%if post.melk_pic %}
-                  <img src="{{ post.melk_pic.url}}" class="img-fluid"> تصویر سند</label>
-                  {%endif%}
-                  
-                </div>
-                </div>
-              </div>
-              
-                  {% comment %} {%include "core/upload.html" %} {% endcomment %}
-                {% comment %} <a class="danger" href="{% url 'core:upload' %}">
-                <i class="os-icon os-icon-ui-15"></i></a> {% endcomment %}
-                  
-                  {% comment %} {% if uploaded_file_url %}
-                    <p>مسیر بارگزاری فایل : <a href="{{ uploaded_file_url }}">{{ uploaded_file_url }}</a></p>
-                  {% endif %} {% endcomment %}
-                  
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for=""> وضعیت کنونی ملک</label>
+                                        {{form.melk_state}}
 
-                {% comment %} <form action="{% url 'core:melk_insert' %}" class="dropzone" id="my-awesome-dropzone" method="post" enctype="multipart/form-data">
-                  {% csrf_token %}
-                  <div class="dz-message">
-                    <div>
-                      <h4>Drop files here or click to upload.</h4>
-                      <div class="text-muted">(This is just a demo dropzone. Selected files are not actually uploaded)</div>
-                    </div>
-                  </div>
-                </form> {% endcomment %}
-                
-            </div> 
-            
-            <div class="form-buttons-w text-right">
-              <a class="btn btn-primary step-trigger-btn" href="#stepContent3"> ادامه</a>
-            </div>
-          </div>  
-          
-          <div class="step-content" id="stepContent3">
-            
-          
-            <div class="row">
-              <div class="col-sm-6">
-                <div class="form-group">
-                  <label for=""> استان</label>
-                  <select class="form-control" >
-                          {% for ostan in ostans %}
-		                          <option value="{{ ostan.pk }}">{{ ostan.name}}</option>
-                          {% endfor%}
-                    </select>
-                  {% comment %} {{form.ostan}} {% endcomment %}
-                  
-                </div>
-              </div>
-              <div class="col-sm-6">
-                <div class="form-group">
-                  <label for=""> شهرستان</label>
-                    <select class="form-control" >
-                          {% for city in cities %}
-		                          <option value="{{ city.pk }}">{{ city.name}}</option>
-                          {% endfor%}
-                    </select>
-                  
-                  {% comment %} {{form.city}} {% endcomment %}
-                 
-                </div>
-              </div>
-            </div> 
-            <div class="row">
-                <div class="col-sm-6">
-                  <div class="form-group">
-                    <label for=""> نام دهستان / روستا</label>
-                      <select class="form-control" >
-                          {% for rosta in rostas %}
-		                          <option value="{{ rosta.pk }}">{{ rosta.name}}</option>
-                          {% endfor%}
-                    </select>
-                    {% comment %} {{form.rosta}} {% endcomment %}
-                  </div>
-                </div>
-                <div class="col-sm-6">
-                  <div class="form-group">
-                    <label for="">کد پستی</label>
-                    {{form.post_code}}
-                  </div>
-                </div>
-            </div> 
-            <div class="form-group">
-                <label for="">  آدرس :</label>
-                {{form.address}}
-            </div>
-            <div class="element-box">
-                  <h5 class="form-header">
-                   بارگزاری نقشه جغرافیایی سند
-                  </h5>
-                  {% comment %} <input type="file" name="myfile"> {% endcomment %}
-                  {{form.melk_gps}}
-            </div>
-            
-            {% comment %} <div id='map' style='width: 400px; height: 300px;'></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="">نوع کاربری</label>
+                                        {{form.melk_karbari}}
+
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for=""> متولی ملک</label>
+                                        {{form.melk_motavali}}
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-buttons-w text-right">
+                                <a class="btn btn-primary step-trigger-btn" href="#stepContent2"> ادامه</a>
+                            </div>
+                        </div>
+
+
+                        <div class="step-content" id="stepContent2">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="date-input">
+                                        <label for=""> سال واگذاری ملک</label>
+                                        {{form.melk_year}}
+
+                                        {% comment %} <input class="form-control" placeholder="سال واگذاری" type="text"> {% endcomment %}
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="">ارزش ریالی ملک</label>
+                                        {{form.melk_price}}
+                                        {% comment %} <input class="form-control" placeholder="ارزش ریالی" type="number"> {% endcomment %}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for=""> عرصه ملک</label>
+                                        {{form.melk_arseh}}
+                                        {% comment %} <input class="form-control" placeholder="عرصه ملک" type="text"> {% endcomment %}
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="">اعیان ملک</label>
+                                        {{form.melk_ayan}}
+                                        {% comment %} <input class="form-control" placeholder="اعیان ملک" type="text"> {% endcomment %}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label>   توضیحات سند</label>
+                                        {{form.melk_comment}}
+                                        {% comment %} <textarea class="form-control" rows="3"></textarea> {% endcomment %}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label>   بارگزاری تصویر سند</label>
+
+                                        {% comment %} <input type="file" name="myfile"> {% endcomment %}
+                                        {{form.melk_pic}}
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            {%if post.melk_pic %}
+                                                <img src="{{ post.melk_pic.url}}" class="img-fluid"> تصویر سند</img>
+                                            {%endif%}
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-buttons-w text-right">
+                                <a class="btn btn-primary step-trigger-btn" href="#stepContent3"> ادامه</a>
+                            </div>
+                        </div>
+
+                        <div class="step-content" id="stepContent3">
+
+
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for=""> استان</label>
+                                        <select class="form-control" >
+                                            {% for ostan in ostans %}
+                                                <option value="{{ ostan.pk }}">{{ ostan.name}}</option>
+                                            {% endfor%}
+                                        </select>
+                                        {% comment %} {{form.ostan}} {% endcomment %}
+
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for=""> شهرستان</label>
+                                        <select class="form-control" >
+                                            {% for city in cities %}
+                                                <option value="{{ city.pk }}">{{ city.name}}</option>
+                                            {% endfor%}
+                                        </select>
+
+                                        {% comment %} {{form.city}} {% endcomment %}
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for=""> نام دهستان / روستا</label>
+                                        <select class="form-control" >
+                                            {% for rosta in rostas %}
+                                                <option value="{{ rosta.pk }}">{{ rosta.name}}</option>
+                                            {% endfor%}
+                                        </select>
+                                        {% comment %} {{form.rosta}} {% endcomment %}
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="">کد پستی</label>
+                                        {{form.post_code}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="">  آدرس :</label>
+                                {{form.address}}
+                            </div>
+                            <div class="element-box">
+                                <h5 class="form-header">
+                                    بارگزاری نقشه جغرافیایی سند
+                                </h5>
+
+                                {{form.melk_gps}}
+                            </div>
+                            {% comment %} <input type="file" name="myfile">
+                             <div id='map' style='width: 400px; height: 300px;'></div>
                 <script>
                     mapboxgl.accessToken = {{ mapbox_access_token }};
                     var map = new mapboxgl.Map({
@@ -252,16 +226,16 @@
                     zoom: 9
                     });   
                 </script> {% endcomment %}
-            <div class="form-buttons-w text-right">
-              <button class="btn btn-primary">ثبت اطلاعات</button>
+                            <div class="form-buttons-w text-right">
+                                <button class="btn btn-primary">ثبت اطلاعات</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
-          </div>          
-        </form>
-        </div>      
-      </div>
-    </div>
-         
-  </div>
-</div>
+        </div>
 
+    </div>
+
+</div>
 {% endblock %}
