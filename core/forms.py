@@ -3,10 +3,12 @@ from django.contrib.auth import (
     authenticate,
     get_user_model
 )
-
-User = get_user_model()
+from django.core.exceptions import ValidationError
+from django.utils.translation import ugettext_lazy as _
 from .models import Melk, Unit, Ostan, City, Rosta
 
+
+User = get_user_model()
 
 class SearchForm(forms.Form):
     search = forms.CharField(
@@ -20,20 +22,20 @@ class UserLoginForm(forms.Form):
     password = forms.CharField(
         widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'کلمه عبور خود را وارد نمایید'}))
 
-    def clean(self, *args, **kwargs):
-        username = self.cleaned_data.get('username')
-        password = self.cleaned_data.get('password')
+    def clean_username(self):
+        data = self.cleaned_data['username']
+        #password = self.cleaned_data('password')
 
-        if username and password:
-            user = authenticate(username=username, password=password)
+        if data != User.username():
+            user = authenticate(username=data)
             if not user:
-                raise forms.ValidationError('نام کاربری وجود ندارد')
-            if not user.check_password(password):
-                raise forms.ValidationError('کلمه عبور اشتباه است')
+                raise ValidationError(_('نام کاربری وجود ندارد'))
+            # if not user.check_password(password):
+            #     raise forms.ValidationError('کلمه عبور اشتباه است')
             if not user.is_active:
-                raise forms.ValidationError('کاربر فعال نیست')
-            return super(UserLoginForm, self).clean(*args, **kwargs)
-
+                raise ValidationError(_('کاربر فعال نیست'))
+            #return super(UserLoginForm, self).clean(*args, **kwargs)
+            return data
 
 class UserRegisterForm(forms.ModelForm):
     username = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'نام کاربری '}))
