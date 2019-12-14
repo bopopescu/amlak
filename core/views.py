@@ -142,125 +142,28 @@ def Upload_view(request):
 
 
 def MelkCreateView(request):
-    if not request.user.is_authenticated :
-        return django.shortcuts.render (request, 'core/404err.html')
-    # postt = get_object_or_404(Melk)
-    form = MelkForm(request.POST or None, request.FILES or None)
-    cities = City.objects.all()
-    ostans = Ostan.objects.all()
-    rostas = Rosta.objects.all()
+    # if not request.user.is_authenticated :
+    #     return django.shortcuts.render (request, 'core/404err.html')
+    #postt = get_object_or_404(Ostan,id=id)
 
-    #post = Melk.objects.all()
-    
-    # form1 = MelkFormAsli(request.POST or None)
-    # form2 = MelkFormOmomi(request.POST or None)
-    # form3 = MelkFormAddress(request.POST or None)
-    #post = Melk.objects.all()
-    
+    form = MelkForm(request.POST or None, request.FILES or None)
+
     if form.is_valid():
         post = form.save()
         messages.success(request, "ثبت با موفقیت انجام شد...")
-        form = MelkForm()
         return django.shortcuts.HttpResponseRedirect(post.get_absolute_url())
-    else :
-        messages.error(request, "فرم قانونی نیست")
+        # else :
+        #     messages.error(request, "فرم قانونی نیست")
 
     context = {
-      "form":form, 
-      "cities":cities,
-      "ostans":ostans,
-      "rostas":rostas,
-      
+      "form":form,
         }
     return django.shortcuts.render (request, 'core/melk_insert1.html', context)
 
-    # def get_context_data(self, **kwargs):
-    #     context = super().get_context_data(**kwargs)
-    #     return context
-    
-    
-    #    return render(request, 'core/simple_upload.html', {
-    #         'uploaded_file_url': uploaded_file_url
-    #    })
-    # return render(request, 'core/simple_upload.html')
-    # myfile = request.FILES['myfile']
-    # fs = FileSystemStorage()
-    # filename = fs.save(myfile.name, myfile)
-    # filess =  fs.url(filename)
-    
-    # if form.is_valid():
-    #     postss= form.save()
-    #     messages.success(request,"ثبت با موفقیت انجام شد...")
-    #     form = MelkForm()
-    #     return HttpResponseRedirect(postss.get_absolute_url())
-        # if request.method == 'POST' :
-            
-    # if form1.is_valid():
-    #     postss= form1.save()
-    #     messages.success(request,"ثبت با موفقیت انجام شد...")
-    #     form1 = MelkFormAsli()
-    #     return HttpResponseRedirect(postss.get_absolute_url())
-    # if form2.is_valid():
-    #     postss2= form2.save()
-    #     messages.success(request,"ثبت با موفقیت انجام شد...")
-    #     form2 = MelkFormOmomi()
-    #     return HttpResponseRedirect(postss2.get_absolute_url())
-    # if form3.is_valid():
-    #     postss3= form3.save()
-    #     messages.success(request,"ثبت با موفقیت انجام شد...")
-    #     form3 = MelkFormAddress()
-    #     return HttpResponseRedirect(postss2.get_absolute_url())
-   
-    # melk_list = Melk.objects.all()
-    # paginator = Paginator(melk_list, 5 ) # Show 5 unit per page  
-    # page = request.GET.get('page', '1')
-    # try:
-    #     posts=paginator.page(page)
-    # except PageNotAnInteger:     
-    #     posts=paginator.page(1)
-    # except(EmptyPage):
-    #    posts = paginator.page(paginator.num_pages)
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context
 
-    #context = {
-      #"post":post,
-    #  "form":form, 
-      #"filess": filess,
-    #   "form1":form1, 
-    #   "form2":form2, 
-    #   "form3":form3, 
-    #   "posts":posts, 
-    #}
-    
-    # return render (request,'core/melk_insert1.html',context )
-
-# def search(request):
-
-#     template_name = 'search.html'
-
-#     query = request.GET.get('q', '')
-#     if query:
-#         # query example
-#         results = MyEntity.objects.filter(name__icontains=query).distinct()
-#     else:
-#         results = []
-#     return render(
-#         request, template_name, {'results': results})
-
-# def search_view(request):
-#     countries = Unit.objects.all()
-#     form = SearchForm(request.GET)
-#     if form.is_valid():
-#         if form.cleaned_data["q"]:
-#             countries = countries.filter(name__icontains=form.cleaned_data["q"])
-#         elif form.cleaned_data["government_type"]:
-#             countries = countries.filter(government=form.cleaned_data["government_type"])
-#         elif form.cleaned_data["industry"]:
-#             countries = countries.filter(industries=form.cleaned_data["industries"])
-#     context = {
-#                 "form": form, "country_list": countries
-#     }
-#     return render(request, "core/unit_edit.html",
-#            context)
 def MelkUpdateView(request):
    # postt = get_object_or_404(Melk, id=id)
     post = Melk.objects.all()

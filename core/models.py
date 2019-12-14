@@ -1,30 +1,24 @@
-import datetime
 import django.db
-from django.utils import timezone
 from django.urls import reverse
 
 
 
 class Ostan(django.db.models.Model):
     name = django.db.models.CharField(max_length=20, verbose_name="استان")
-
     def __str__(self):
         return self.name
 
 class City(django.db.models.Model):
     ostan = django.db.models.ForeignKey(Ostan, on_delete=django.db.models.CASCADE, verbose_name ='شهرستان')
     name = django.db.models.CharField(max_length=50)
-           
     def __str__(self):
         return self.name
 
 class Rosta(django.db.models.Model):
     city = django.db.models.ForeignKey(City, on_delete=django.db.models.CASCADE)
     name = django.db.models.CharField(max_length=50, verbose_name="روستا")
-
     def __str__(self):
         return self.name
-
 
 class Unit(django.db.models.Model):
     u_code = django.db.models.CharField(max_length=40, verbose_name="کد منطقه")
@@ -49,9 +43,30 @@ class Melk(django.db.models.Model):
             ('ابتیاعی','ابتیاعی')
             )
     sanad_type = django.db.models.CharField(choices=CHOICES1, max_length=50, verbose_name="نوع سند واگذاری")
-    melk_state = django.db.models.CharField(max_length=50, verbose_name="وضعیت کنونی ملک")
-    melk_motavali = django.db.models.CharField(max_length=100, verbose_name="متولی ملک")
-    melk_karbari = django.db.models.CharField(max_length=50, verbose_name="نوع کاربری ملک")
+    CHOICES4 = (
+            ('در حال بهره برداری', 'درحال بهره برداری'),
+            ('کشاورزی', 'کشاورزی'),
+            ('زمین', 'زمین')
+
+        )
+    melk_state = django.db.models.CharField(choices=CHOICES4,max_length=50, verbose_name="وضعیت کنونی ملک")
+    CHOICES3 = (
+            ('آموزش و پرورش', ' آموزش و پرورش'),
+            ('اوقاف', 'اوقاف'),
+            ('دولت', 'دولت'),
+            ('آستانه', 'آستانه'),
+            ('غیره', 'غیره'),
+
+        )
+    melk_motavali = django.db.models.CharField(choices=CHOICES3,max_length=100, verbose_name="متولی ملک")
+    CHOICES2 = (
+            ('آموزشی', 'آموزشی'),
+            ('اداری', 'اداری'),
+            ('مسکونی', 'مسکونی'),
+            ('غیره', 'غیره')
+
+        )
+    melk_karbari = django.db.models.CharField(choices=CHOICES2,max_length=50, verbose_name="نوع کاربری ملک")
     melk_year = django.db.models.DateField(verbose_name="سال واگذاری ملک")
     melk_arseh = django.db.models.CharField(max_length=20, verbose_name="عرصه ملک")
     melk_price = django.db.models.CharField(max_length=50, verbose_name="ارزش ریالی ملک")
@@ -69,5 +84,4 @@ class Melk(django.db.models.Model):
     
     def get_absolute_url(self):
         return reverse("core:melk_insert", kwargs={})
-    
-    
+

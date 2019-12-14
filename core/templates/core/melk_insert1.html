@@ -4,7 +4,7 @@
 {% load static %}
 {%load crispy_forms_tags%}
 
-<div class="content-i">
+{% comment %} <div class="content-i"> {% endcomment %}
     <div class="element-wrapper">
         <div class="element-box">
             {% include "core/message.html" %}
@@ -162,25 +162,25 @@
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label for=""> استان</label>
-                                        <select class="form-control" >
+                                        {% comment %} <select class="form-control" >
                                             {% for ostan in ostans %}
                                                 <option value="{{ ostan.pk }}">{{ ostan.name}}</option>
                                             {% endfor%}
-                                        </select>
-                                        {% comment %} {{form.ostan}} {% endcomment %}
+                                        </select> {% endcomment %}
+                                         {{form.ostan}} 
 
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label for=""> شهرستان</label>
-                                        <select class="form-control" >
+                                        {% comment %} <select class="form-control" >
                                             {% for city in cities %}
                                                 <option value="{{ city.pk }}">{{ city.name}}</option>
                                             {% endfor%}
-                                        </select>
+                                        </select> {% endcomment %}
 
-                                        {% comment %} {{form.city}} {% endcomment %}
+                                        {{form.city}} 
 
                                     </div>
                                 </div>
@@ -189,12 +189,12 @@
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label for=""> نام دهستان / روستا</label>
-                                        <select class="form-control" >
+                                        {% comment %} <select class="form-control" >
                                             {% for rosta in rostas %}
                                                 <option value="{{ rosta.pk }}">{{ rosta.name}}</option>
                                             {% endfor%}
-                                        </select>
-                                        {% comment %} {{form.rosta}} {% endcomment %}
+                                        </select> {% endcomment %}
+                                        {{form.rosta}}
                                     </div>
                                 </div>
                                 <div class="col-sm-6">

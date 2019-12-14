@@ -5,9 +5,10 @@
 {% load static %}
 {%load crispy_forms_tags%} 
 <div>
-<form method="POST" action="{% url 'core:melk_insert' %}" >
+<form method="POST" action="{% url 'core:melk_insert' %}" enctype="multipart/form-data" >
     {% csrf_token %}
     {{form|crispy}}
+    {% comment %} {{ form|safe }} {% endcomment %}
 
     <div class="form-buttons-w">
         <button class="btn btn-primary" type="submit"> ثبت</button>
