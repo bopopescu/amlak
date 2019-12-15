@@ -15,13 +15,13 @@ class Ostan(django.db.models.Model):
         return self.name
 
 class City(django.db.models.Model):
-    ostan = django.db.models.ForeignKey(Ostan, on_delete=django.db.models.CASCADE, verbose_name ='شهرستان')
-    name = django.db.models.CharField(max_length=50)
+    ostan = django.db.models.ForeignKey(Ostan, on_delete=django.db.models.CASCADE, verbose_name ='استان')
+    name = django.db.models.CharField(max_length=50,verbose_name ='شهر')
     def __str__(self):
         return self.name
 
 class Rosta(django.db.models.Model):
-    city = django.db.models.ForeignKey(City, on_delete=django.db.models.CASCADE)
+    city = django.db.models.ForeignKey(City, on_delete=django.db.models.CASCADE,verbose_name ='شهرستان')
     name = django.db.models.CharField(max_length=50, verbose_name="روستا")
     def __str__(self):
         return self.name

@@ -174,7 +174,7 @@ def MelkUpdateView(request):
     #     messages.success(request,"ویرایش با موفقیت انجام شد...")
     #     return HttpResponseRedirect(postt.get_absolute_url())
     #unit_list = Unit.objects.all()
-    paginator = Paginator(post, 5 ) # Show 5 unit per page
+    paginator = Paginator(post, 2 ) # Show 5 unit per page
     try:
         page = int(request.GET.get('page', '1' ))
     except:
