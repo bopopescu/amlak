@@ -1,7 +1,13 @@
 import django.db
 from django.urls import reverse
-
-
+from django.contrib.gis.db import models
+from django.contrib.gis.gdal import DataSource
+from location_field.models.spatial import LocationField
+from django.contrib.gis.gdal.geometries import Point
+class Location( models.Model ):
+    location_point = models.PointField( null=True, blank=True )
+# class Location(models.Model):
+#         location_point = LocationField(based_fields=['city'], zoom=7, default=Point(51.67, 32.65), null=True, blank=True)
 
 class Ostan(django.db.models.Model):
     name = django.db.models.CharField(max_length=20, verbose_name="استان")
