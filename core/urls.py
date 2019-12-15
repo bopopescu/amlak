@@ -18,7 +18,7 @@ urlpatterns = [
         path('melk/', MelkCreateView, name='melk_insert'),
         path('update/', MelkUpdateView, name='melk_update'),
         path('upload/', Upload_view, name='upload'),
-        path('<int:id>/delete/', MelkDeleteView, name='melk_delete'),
+        path('<int:id>/melkdelete/', MelkDeleteView, name='melk_delete'),
 
 ]
 

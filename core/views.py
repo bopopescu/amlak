@@ -125,7 +125,7 @@ def UnitDeleteView(request, id):
     if request.method == "POST":
        post.delete()
        return django.shortcuts.HttpResponseRedirect(post.get_absolute_url())
-    return django.shortcuts.render (request, "core/confirm.html", {"post":post})
+    return django.shortcuts.render (request, "core/confirm_unit.html", {"post":post})
 
 def Upload_view(request):
     #post = get_object_or_404(Melk)
@@ -194,8 +194,8 @@ def MelkUpdateView(request):
 
 
 def MelkDeleteView(request, id):
-    post = django.shortcuts.get_object_or_404(Unit, id=id)
+    post = django.shortcuts.get_object_or_404(Melk, id=id)
     if request.method == "POST":
        post.delete()
        return django.shortcuts.HttpResponseRedirect(post.get_absolute_url())
-    return django.shortcuts.render (request, "core/confirm.html", {"post":post})
+    return django.shortcuts.render (request, "core/confirm_melk.html", {"post":post})

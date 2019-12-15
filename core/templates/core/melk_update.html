@@ -4,7 +4,7 @@
 {% load bootstrap4 %}
 {%load crispy_forms_tags%} 
 
-<div class="col-lg-8">
+<div class="col-lg-12">
                         <div class="element-wrapper">
                     
                             <div class="element-box">
@@ -33,12 +33,9 @@
                                         START - Table with actions
                                         ------------------  -->
                                         <div class="table-responsive">
-                                            <table class="table table-bordered table-lg table-v2 table-striped">
+                                            <table class="table table-bordered table-lg table-v1 table-striped">
                                             <thead>
                                                     <tr>
-                                                    <th>
-                                                    </th>
-
                                                     <th>
                                                         <h6>
                                                         کد ملک
@@ -51,12 +48,27 @@
                                                     </th>
                                                     <th>
                                                         <h6>
-                                                        نام منطقه
+                                                      متولی ملک
                                                         </h6>
                                                     </th>
                                                     <th>
                                                         <h6>
-                                                        متولی ملک
+                                                        تاریخ سند
+                                                        </h6>
+                                                    </th>
+                                                    <th>
+                                                        <h6>
+                                                       کاربری ملک
+                                                        </h6>
+                                                    </th>
+                                                    <th>
+                                                        <h6>
+                                                        شهرستان
+                                                        </h6>
+                                                    </th>
+                                                    <th>
+                                                        <h6>
+                                                        آدرس
                                                         </h6>
                                                     </th>
                                                     <th>
@@ -64,6 +76,7 @@
                                                         عملیات
                                                         </h6>
                                                     </th>
+
                                                     </tr>
                                             </thead>
                                             <tbody >               
@@ -71,21 +84,30 @@
                                                     {%for Sabt in posts %}
                                                         
                                                         <tr>
-                                                            <td class="text-center">
+                                                            {% comment %} <td class="text-center">
                                                                 <input class="form-control" type="checkbox">
-                                                            </td>
+                                                            </td> {% endcomment %}
                                                     
-                                                            <td>
-                                                                {{ Sabt.melk_name }}
-                                                            </td>                    
-                                                            <td>
-                                                                {{ Sabt.khayer_name }}
-                                                            </td>
                                                             <td>
                                                                 {{ Sabt.sanad_asli }}
                                                             </td>                    
                                                             <td>
-                                                                {{ Sabt.sanad_farye }}
+                                                                {{ Sabt.melk_name }}
+                                                            </td>
+                                                            <td>
+                                                                {{ Sabt.melk_motavali }}
+                                                            </td>  
+                                                            <td>
+                                                                {{ Sabt.melk_year }}
+                                                            </td>                    
+                                                            <td>
+                                                                {{ Sabt.melk_karbari }}
+                                                            </td>
+                                                            <td>
+                                                                {{ Sabt.city }}
+                                                            </td>                                      
+                                                            <td>
+                                                                {{ Sabt.address }}
                                                             </td>
                                                             <td class="row-actions">
                                                                 <a href="{% url 'core:melk_update'  %}"><i class="os-icon os-icon-ui-49"></i></a>

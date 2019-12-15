@@ -1,0 +1,13 @@
+{% extends "core/index.html" %}
+{%block content%}
+
+<form action="{% url 'core:melk_delete' post.id %}" method='POST' > 
+    {% csrf_token %}
+    <h1> آیا شما مطمئنید می خواهید "{{post.melk_name}}" را پاک کنید ...</h1>
+    <p>
+    <input name="" id="" class="btn btn-primary" type="submit" value="بله"/>
+    <a href="{% url 'core:melk_update'  %}"> خیر</a>
+    </p>
+</form>
+
+{% endblock %}
