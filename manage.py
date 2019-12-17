@@ -2,7 +2,7 @@
 """Django's command-line utility for administrative tasks."""
 import os
 import sys
-
+#ghdfqjAF;LJ;QLWKF;LWQEKFEW
 
 def main():
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'amlak2.settings')
