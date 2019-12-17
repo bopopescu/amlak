@@ -1,4 +1,5 @@
 import django.db
+from django_jalali.db import models as jmodels
 from django.urls import reverse
 from django.contrib.gis.db import models
 from ckeditor.fields import RichTextField
@@ -77,7 +78,7 @@ class Melk(django.db.models.Model):
 
         )
     melk_karbari = django.db.models.CharField(choices=CHOICES2,max_length=50, verbose_name="نوع کاربری ملک")
-    melk_year = django.db.models.DateField(verbose_name="سال واگذاری ملک")
+    melk_year = jmodels.jDateField(verbose_name="سال واگذاری ملک")
     melk_arseh = django.db.models.CharField(max_length=20, verbose_name="عرصه ملک")
     melk_price = django.db.models.CharField(max_length=50, verbose_name="ارزش ریالی ملک")
     melk_ayan = django.db.models.CharField(max_length=20, verbose_name="اعیان ملک")
@@ -89,6 +90,10 @@ class Melk(django.db.models.Model):
     post_code = django.db.models.CharField(max_length=10, verbose_name="کدپستی")
     address = django.db.models.CharField(max_length=200, verbose_name="آدرس ملک")
     melk_gps = django.db.models.CharField(max_length=100, verbose_name="موقعیت جغرافیایی ملک")
+    
+    class Meta:
+        verbose_name = 'ملک'
+        verbose_name_plural = 'املاک'
     def __str__(self):
         return self.melk_name
     

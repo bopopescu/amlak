@@ -1,5 +1,5 @@
 
-
+from rtl import rtl
 from django import forms
 from django.contrib.auth import (
     authenticate,
@@ -114,4 +114,5 @@ class MelkForm( forms.ModelForm ):
                 'address' : forms.TextInput( attrs={'class':'form-control'} ),
                 'melk_gps' : forms.TextInput( attrs={'class':'form-control'} ),
         }
+        
 
