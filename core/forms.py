@@ -8,6 +8,7 @@ from django.contrib.auth import (
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
 from .models import Melk, Unit, Ostan, City, Rosta
+from ckeditor.widgets import CKEditorWidget
 
 User = get_user_model()
 

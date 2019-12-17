@@ -1,9 +1,13 @@
 import django.db
 from django.urls import reverse
 from django.contrib.gis.db import models
+from ckeditor.fields import RichTextField
+#from ckeditor_uploader.fields import RichTextUploadField
 from django.contrib.gis.gdal import DataSource
 from location_field.models.spatial import LocationField
 from django.contrib.gis.gdal.geometries import Point
+import ckeditor
+import ckeditor
 class Location( models.Model ):
     location_point = models.PointField( null=True, blank=True )
 # class Location(models.Model):
@@ -77,7 +81,7 @@ class Melk(django.db.models.Model):
     melk_arseh = django.db.models.CharField(max_length=20, verbose_name="عرصه ملک")
     melk_price = django.db.models.CharField(max_length=50, verbose_name="ارزش ریالی ملک")
     melk_ayan = django.db.models.CharField(max_length=20, verbose_name="اعیان ملک")
-    melk_comment = django.db.models.CharField(max_length=1000, verbose_name="توضیحات سند ملک")
+    melk_comment = RichTextField(max_length=1000, verbose_name="توضیحات سند ملک")
     melk_pic = django.db.models.FileField(blank=True, null=True, verbose_name="تصویر سند ملک")
     ostan = django.db.models.ForeignKey(Ostan, on_delete=django.db.models.CASCADE, verbose_name="استان")
     city = django.db.models.ForeignKey(City, on_delete=django.db.models.CASCADE, verbose_name="شهرستان")
