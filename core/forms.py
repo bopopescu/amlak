@@ -1,6 +1,9 @@
 
 from rtl import rtl
 from django import forms
+import django_jalali.admin as jadmin
+
+
 from django.contrib.auth import (
     authenticate,
     get_user_model
@@ -101,7 +104,11 @@ class MelkForm( forms.ModelForm ):
                 'melk_state' : forms.Select( attrs={'class':'form-control'} ),
                 'melk_motavali': forms.Select( attrs={'class':'form-control'} ),
                 'melk_karbari' : forms.Select( attrs={'class':'form-control'} ),
-                'melk_year' : forms.DateInput( attrs={'class':'form-control'} ),
+                'melk_year' : forms.DateInput( format=('%d-%m-%Y'), 
+                    attrs={'class':'form-control','type': 'date',
+                'data-provide': 'datepicker',
+                'data-date-format': 'yyyy-mm-dd',
+                } ),
                 'melk_arseh': forms.NumberInput( attrs={'class':'form-control'} ),
                 'melk_ayan' : forms.NumberInput( attrs={'class':'form-control'} ),
                 'melk_price' : forms.TextInput( attrs={'class': 'form-control'} ),
@@ -114,5 +121,5 @@ class MelkForm( forms.ModelForm ):
                 'address' : forms.TextInput( attrs={'class':'form-control'} ),
                 'melk_gps' : forms.TextInput( attrs={'class':'form-control'} ),
         }
-        
+
 

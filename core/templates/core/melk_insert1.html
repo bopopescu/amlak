@@ -94,7 +94,9 @@
                                 <div class="col-sm-6">
                                     <div class="date-input">
                                         <label for=""> سال واگذاری ملک</label>
-                                        {{form.melk_year|jformat:"%A %d %B %Y %H:%M"}}
+                                        {% comment %} <img class="ui-datepicker-trigger" src="/static/admin/jquery.ui.datepicker.jalali/themes/base/images/icon-calendar.svg" alt="..." title="...">  {% endcomment %}
+                                        {{form.melk_year}}
+                                        
 
                                         {% comment %} <input class="form-control" placeholder="سال واگذاری" type="text"> {% endcomment %}
                                     </div>
