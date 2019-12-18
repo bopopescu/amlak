@@ -105,7 +105,7 @@ class MelkForm( forms.ModelForm ):
                 'melk_motavali': forms.Select( attrs={'class':'form-control'} ),
                 'melk_karbari' : forms.Select( attrs={'class':'form-control'} ),
                 'melk_year' : forms.DateInput( format=('%d-%m-%Y'), 
-                    attrs={'class':'form-control','type': 'date',
+                    attrs={'class':'date-input form-control','type': 'date',
                 'data-provide': 'datepicker',
                 'data-date-format': 'yyyy-mm-dd',
                 } ),

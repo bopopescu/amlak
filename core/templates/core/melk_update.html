@@ -18,15 +18,24 @@
                                         <!--------------------
                                         START - Controls Above Table
                                         -------------------->
-                                        {% comment %} <div class="controls-above-table">
+                                        <div class="controls-above-table">
                                             <div class="row">
-                                            <div class="col-sm-6">
-                                                <form class="form-inline justify-content-sm-end">
-                                                <input class="form-control form-control-sm rounded bright" placeholder="جستجو" type="text">              
+                                            <div class="col-sm-3">
+                                            
+                                            <div class="element-search autosuggest-search-activator">
+                                                <form class="form-inline justify-content-sm-end" actions="." Method="GET">
+                                                    {% comment %} {% csrf_token %}  {% endcomment %}
+                                                   <input name="melksearch" class="form-control form-control-sm rounded bright" placeholder="جستجو" type="search">
+                                                   
+                                                    </input>           
                                                 </form>
+                                                
                                             </div>
                                             </div>
-                                        </div> {% endcomment %}
+                                            </div>
+                                            </div>
+                                            
+                                        </div> 
                                         <!--------------------
                                         END - Controls Above Table
                                         ------------------          --><!--------------------
@@ -79,9 +88,47 @@
 
                                                     </tr>
                                             </thead>
-                                            <tbody >               
-                                               
-                                                    {%for Sabt in posts %}
+                                            <tbody >     
+                                                
+                                               {% if queryset is not None %}
+                                                     
+                                                        {%for Sabt in queryset %}
+                                                        
+                                                            <tr>
+                                                                {% comment %} <td class="text-center">
+                                                                    <input class="form-control" type="checkbox">
+                                                                </td> {% endcomment %}
+                                                        
+                                                                <td>
+                                                                    {{ Sabt.sanad_asli }}
+                                                                </td>                    
+                                                                <td>
+                                                                    {{ Sabt.melk_name }}
+                                                                </td>
+                                                                <td>
+                                                                    {{ Sabt.melk_motavali }}
+                                                                </td>  
+                                                                <td>
+                                                                    {{ Sabt.melk_year }}
+                                                                </td>                    
+                                                                <td>
+                                                                    {{ Sabt.melk_karbari }}
+                                                                </td>
+                                                                <td>
+                                                                    {{ Sabt.city }}
+                                                                </td>                                      
+                                                                <td>
+                                                                    {{ Sabt.address }}
+                                                                </td>
+                                                                <td class="row-actions">
+                                                                    <a href="{% url 'core:melk_update'  %}"><i class="os-icon os-icon-ui-49"></i></a>
+                                                                    <a class="danger" href="{% url 'core:melk_delete' Sabt.id %}"><i class="os-icon os-icon-ui-15"></i></a>
+                                                                </td>                      
+                                                            
+                                                            </tr>
+                                                        {% endfor %}    
+                                                    {% else%}          
+                                                         {%for Sabt in queryset %}
                                                         
                                                         <tr>
                                                             {% comment %} <td class="text-center">
@@ -115,11 +162,14 @@
                                                             </td>                      
                                                         
                                                         </tr>
-                                                    {% endfor %}              
-                                                
+                                                    {% endfor %}   
+                                                {%endif%}
+
                                                         
                                             </tbody>
+                                           
                                             </table>
+                                            
                                         </div> 
                                         
                                             {%if posts.has_other_pages %}

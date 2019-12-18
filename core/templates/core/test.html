@@ -1,0 +1,9 @@
+ {% extends "core/index.html" %}
+{%block content%}
+ 
+ 
+{%for S in queryset %}
+    <li>{{S.melk_name}}</li>
+{%endfor%}
+
+{% endblock %}
