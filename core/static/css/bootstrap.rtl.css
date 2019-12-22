@@ -4,14 +4,21 @@
  * Licensed under MIT (https://github.com/parsmizban/RTL-Bootstrap/blob/master/LICENSE)
  */
 html {
-  font-family: Tahoma;
+  font-family: 'BYekan';
+  src: url('../Fonts/BYekan.eot'); /* IE9 Compat Modes */
+  src: url('../Fonts/BYekan.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+         url('../Fonts/BYekan.woff2') format('woff2'), /* Super Modern Browsers */
+         url('../Fonts/BYekan.woff') format('woff'), /* Pretty Modern Browsers */
+         url('../Fonts/BYekan.ttf')  format('truetype'), /* Safari, Android, iOS */
+         url('../Fonts/BYekan.svg#svgFontName') format('svg'); /* Legacy iOS */
+  /* font-family: Tahoma; */
 }
 button,
 input,
 optgroup,
 select,
 textarea {
-  font-family: Tahoma, sans-serif;
+  font-family: BYekan, Tahoma, sans-serif;
 }
 dd {
   margin-left: inherit;

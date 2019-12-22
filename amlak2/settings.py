@@ -67,6 +67,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'django_jalali',
     'bootstrap4',
+    'django_filters',
     'cleanup',
     'ckeditor',
     #'ckeditor_uploader',

@@ -165,26 +165,9 @@ def MelkCreateView(request):
         return context
 
 def MelkUpdateView(request):
-  
     post = Melk.objects.all()
-    
-    query = request.GET.get('melksearch')
-    
-    if query!='' and query is not None:
-       
-        qs = post.filter(melk_name = query)
-    else:
-        qs = Melk.objects.all()
-        
-
-    # form = MelkForm(request.POST or None, instance=postt)
-    # if form.is_valid():
-    #     form.save()
-    #     messages.success(request,"ویرایش با موفقیت انجام شد...")
-    #     return HttpResponseRedirect(postt.get_absolute_url())
-    #unit_list = Unit.objects.all()
    
-    paginator = Paginator(post, 2 ) # Show 5 unit per page
+    paginator = Paginator(post, 5 ) # Show 5 unit per page
     try:
         page = int(request.GET.get('page', '1' ))
     except:
@@ -194,26 +177,13 @@ def MelkUpdateView(request):
     except(EmptyPage):
        posts = paginator.page(paginator.num_pages)
     context = {
-      #"postt":postt,
-      "post":post,
-      #"form":form,
-      'queryset':qs,
+      "post":post,   
       "posts":posts,   
     }
 
-    return django.shortcuts.render (request, 'core/melk_update.html', context)
-
-def MelkFilterView(request):
-    qs = Melk.objects.all()
-    query = request.GET.get('melksearch')
-    print (query)
-    if query!='' and query is not None:
-        qs = qs.filter(melk_name = query)
-
-    context = {
-        'queryset':qs
-    }
-    return django.shortcuts.render (request, 'core/test.html', context)
+    return django.shortcuts.render (request, 'core/melk_update.html', context) 
+    
+   
 
 def MelkDeleteView(request, id):
     post = django.shortcuts.get_object_or_404(Melk, id=id)

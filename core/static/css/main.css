@@ -83,10 +83,20 @@ TABLE OF CONTENTS
   --breakpoint-xxl: 1450px;
   --breakpoint-xxxl: 1550px;
   --breakpoint-xxxxl: 1650px;
-  --font-family-sans-serif: "Avenir Next W01", "Proxima Nova W01", "Rubik", -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  /* --font-family-sans-serif: "Avenir Next W01", "Proxima Nova W01", "Rubik", -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+} */
 }
-
+html {
+  font-family: 'BYekan';
+  src: url('../Fonts/BYekan.eot'); /* IE9 Compat Modes */
+  src: url('../Fonts/BYekan.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+         url('../Fonts/BYekan.woff2') format('woff2'), /* Super Modern Browsers */
+         url('../Fonts/BYekan.woff') format('woff'), /* Pretty Modern Browsers */
+         url('../Fonts/BYekan.ttf')  format('truetype'), /* Safari, Android, iOS */
+         url('../Fonts/BYekan.svg#svgFontName') format('svg'); /* Legacy iOS */
+  /* font-family: Tahoma; */
+}
 *,
 *::before,
 *::after {
@@ -96,7 +106,8 @@ TABLE OF CONTENTS
 
 html {
   direction:rtl;
-  font-family: sans-serif;
+  font-family: BYekan;
+  /* font-family: sans-serif; */
   line-height: 1.15;
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
@@ -116,7 +127,8 @@ article, aside, dialog, figcaption, figure, footer, header, hgroup, main, nav, s
 body {
   direction:rtl;
   margin: 0;
-  font-family: "Arial", "Proxima Nova W01", "Rubik", -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-family: BYekan, Tahoma, sans-serif;
+  /* font-family: "Arial", "Proxima Nova W01", "Rubik", -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; */
   font-size: 0.9rem;
   font-weight: 400;
   line-height: 1.5;

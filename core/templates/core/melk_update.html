@@ -23,12 +23,11 @@
                                             <div class="col-sm-3">
                                             
                                             <div class="element-search autosuggest-search-activator">
-                                                <form class="form-inline justify-content-sm-end" actions="." Method="GET">
-                                                    {% comment %} {% csrf_token %}  {% endcomment %}
-                                                   <input name="melksearch" class="form-control form-control-sm rounded bright" placeholder="جستجو" type="search">
+                                               
+                                                   <input name="melksearch" id="myInput" class="form-control form-control-sm rounded bright" placeholder="جستجو" type="search">
                                                    
                                                     </input>           
-                                                </form>
+                                               
                                                 
                                             </div>
                                             </div>
@@ -88,16 +87,14 @@
 
                                                     </tr>
                                             </thead>
-                                            <tbody >     
+                                            <tbody id="myTable" >     
                                                 
-                                               {% if queryset is not None %}
+                                               {% if posts is not None %}
                                                      
-                                                        {%for Sabt in queryset %}
+                                                        {%for Sabt in posts %}
                                                         
                                                             <tr>
-                                                                {% comment %} <td class="text-center">
-                                                                    <input class="form-control" type="checkbox">
-                                                                </td> {% endcomment %}
+                                                               
                                                         
                                                                 <td>
                                                                     {{ Sabt.sanad_asli }}
@@ -128,13 +125,10 @@
                                                             </tr>
                                                         {% endfor %}    
                                                     {% else%}          
-                                                         {%for Sabt in queryset %}
+                                                         {%for Sabt in posts %}
                                                         
                                                         <tr>
-                                                            {% comment %} <td class="text-center">
-                                                                <input class="form-control" type="checkbox">
-                                                            </td> {% endcomment %}
-                                                    
+                                                           
                                                             <td>
                                                                 {{ Sabt.sanad_asli }}
                                                             </td>                    

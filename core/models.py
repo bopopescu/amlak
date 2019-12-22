@@ -8,28 +8,43 @@ from django.contrib.gis.gdal import DataSource
 from location_field.models.spatial import LocationField
 from django.contrib.gis.gdal.geometries import Point
 import ckeditor
-import ckeditor
+import django_filters
+
+
 class Location( models.Model ):
     location_point = models.PointField( null=True, blank=True )
 # class Location(models.Model):
 #         location_point = LocationField(based_fields=['city'], zoom=7, default=Point(51.67, 32.65), null=True, blank=True)
 
+    class Meta:
+        verbose_name = 'موقعیت'
+        verbose_name_plural = 'موقعیت جغرافیایی'
+
 class Ostan(django.db.models.Model):
     name = django.db.models.CharField(max_length=20, verbose_name="استان")
     def __str__(self):
         return self.name
+    class Meta:
+        verbose_name = 'استان'
+        verbose_name_plural = 'استان ها'
 
 class City(django.db.models.Model):
     ostan = django.db.models.ForeignKey(Ostan, on_delete=django.db.models.CASCADE, verbose_name ='استان')
     name = django.db.models.CharField(max_length=50,verbose_name ='شهر')
     def __str__(self):
         return self.name
+    class Meta:
+        verbose_name = 'شهر'
+        verbose_name_plural = 'شهرستان'
 
 class Rosta(django.db.models.Model):
     city = django.db.models.ForeignKey(City, on_delete=django.db.models.CASCADE,verbose_name ='شهرستان')
     name = django.db.models.CharField(max_length=50, verbose_name="روستا")
     def __str__(self):
         return self.name
+    class Meta:
+        verbose_name = 'روستا'
+        verbose_name_plural = 'دهستان'
 
 class Unit(django.db.models.Model):
     u_code = django.db.models.CharField(max_length=40, verbose_name="کد منطقه")
@@ -39,6 +54,9 @@ class Unit(django.db.models.Model):
     def get_absolute_url(self):
         return reverse("core:unit_create", kwargs={})
         #return reverse("core:unit_update", kwargs={"id": self.id})
+    class Meta:
+        verbose_name = 'منطقه'
+        verbose_name_plural = 'مناطق'
 
 class Melk(django.db.models.Model):
     melk_name = django.db.models.CharField(max_length=100, verbose_name="نام ملک")
@@ -94,6 +112,7 @@ class Melk(django.db.models.Model):
     class Meta:
         verbose_name = 'ملک'
         verbose_name_plural = 'املاک'
+        ordering = ['sanad_asli']
     def __str__(self):
         return self.melk_name
     
