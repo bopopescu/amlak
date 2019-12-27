@@ -7,6 +7,7 @@ app_name = 'core'
 urlpatterns = [
 
         path('', index_view, name='index'),
+        # path('ajax/load_cities/', load_cities, name='load_cities'),
         #path('logout/', Signout, name='logout'),
         path('login/', login_view, name='login'),
         path('logout/', logout_view, name='logout'),

@@ -14,27 +14,27 @@
                                         <h5 class="form-header">
                                         لیست املاک
                                         </h5>
+                                        
                                         <div class="element-box-tp">
                                         <!--------------------
                                         START - Controls Above Table
                                         -------------------->
-                                        <div class="controls-above-table">
-                                            <div class="row">
-                                            <div class="col-sm-3">
-                                            
-                                            <div class="element-search autosuggest-search-activator">
-                                               
-                                                   <input name="melksearch" id="myInput" class="form-control form-control-sm rounded bright" placeholder="جستجو" type="search">
-                                                   
-                                                    </input>           
-                                               
-                                                
-                                            </div>
-                                            </div>
-                                            </div>
-                                            </div>
-                                            
-                                        </div> 
+                                        <form method= "POST" action=".">
+                                        {% csrf_token %}
+                                            <div class="controls-above-table">
+                                                <div class="row">
+                                                    <div class="col-sm-3">                                                    
+                                                        <div class="element-search autosuggest-search-activator ssg-icon">                                                        
+                                                            <input name="melksearch" id="myInput" class="form-control form-control-sm rounded bright" placeholder="جستجو" type="search" />
+                                                        
+                                                        </div>
+                                                    
+                                                    </div>
+                                                      <button type="submit" class="btn btn-primary ">جستجو</button>
+                                                </div>
+                                           
+                                            </div> 
+                                        </form>  
                                         <!--------------------
                                         END - Controls Above Table
                                         ------------------          --><!--------------------
@@ -163,7 +163,7 @@
                                             </tbody>
                                            
                                             </table>
-                                            
+                                          
                                         </div> 
                                         
                                             {%if posts.has_other_pages %}
@@ -198,6 +198,7 @@
                                             {%endif%}
                                         </div>                                                         
                                     </div>
+                                   
                                 </div> 
                         
                     </div>       

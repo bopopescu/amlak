@@ -123,3 +123,8 @@ class MelkForm( forms.ModelForm ):
         }
 
 
+    # def __init__(self, *args, **kwargs):
+    #         super().__init__(*args, **kwargs)
+    #         self.fields['ostan'].queryset = Ostan.objects.all()
+    #         self.fields['city'].queryset = City.objects.filter(ostan_id = Ostan.id()).order_by('name')
+    #         self.fields['rosta'].queryset = Rosta.objects.all()

@@ -1,4 +1,7 @@
 import django.shortcuts
+#from .filters import MelkFilter
+
+from django.http import JsonResponse
 from .models import Melk, Unit, City, Ostan, Rosta
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
@@ -12,6 +15,7 @@ from django.contrib.auth import (
     login,
     logout
 )
+from django.shortcuts import render
 
 
 # @login_required
@@ -145,9 +149,10 @@ def MelkCreateView(request):
     # if not request.user.is_authenticated :
     #     return django.shortcuts.render (request, 'core/404err.html')
     #postt = get_object_or_404(Ostan,id=id)
-
+    # ostan_id = request.GET.get('ostan')
+    # cities = City.objects.filter(ostan_id=ostan_id).order_by('name')
     form = MelkForm(request.POST or None, request.FILES or None)
-
+    
     if form.is_valid():
         post = form.save()
         messages.success(request, "ثبت با موفقیت انجام شد...")
@@ -157,17 +162,31 @@ def MelkCreateView(request):
 
     context = {
       "form":form,
+    #   "cities": cities
         }
     return django.shortcuts.render (request, 'core/melk_insert1.html', context)
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        return context
+# def load_cities(request):
+#     ostan_id = request.GET.get('ostan')
+#     cities = City.objects.filter(ostan_id=ostan_id).order_by('name')
+#     return render(request, 'core/melk_insert1.html', {'cities': cities})
+
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         return context
+def is_valid_queryparam(param):
+   return param != '' and param is not None
 
 def MelkUpdateView(request):
     post = Melk.objects.all()
+
+    melksearch1 = request.POST.get('melksearch')
+    # post = MelkFilter(request.GET, queryset=Melk.objects.all())
+
+    if is_valid_queryparam(melksearch1):
+       post = post.filter(melk_name = melksearch1)
    
-    paginator = Paginator(post, 5 ) # Show 5 unit per page
+    paginator = Paginator(post, 3 ) # Show 5 unit per page
     try:
         page = int(request.GET.get('page', '1' ))
     except:
