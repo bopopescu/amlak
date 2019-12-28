@@ -1,3 +1,4 @@
+
 import django.db
 import ckeditor
 import django_filters
@@ -57,7 +58,7 @@ class Unit(django.db.models.Model):
     u_code = django.db.models.CharField(max_length=40, verbose_name="کد منطقه")
     u_name = django.db.models.CharField(max_length=50, verbose_name="نام منطقه")
     def __str__(self):
-        return self.u_name
+        return (self.u_name)
     def get_absolute_url(self):
         return reverse("core:unit_create", kwargs={})
         #return reverse("core:unit_update", kwargs={"id": self.id})
@@ -133,4 +134,3 @@ class Melk(django.db.models.Model):
 #         model = Melk
 #         fields = '__All__'
 #         # fields = ['...']
-    

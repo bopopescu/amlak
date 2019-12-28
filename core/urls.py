@@ -7,6 +7,8 @@ app_name = 'core'
 urlpatterns = [
 
         path('', index_view, name='index'),
+        path('uploadcsv/', upload_csv, name='upload_csv'),
+        path('downloadcsv/', download_csv, name='download_csv'),
         # path('ajax/load_cities/', load_cities, name='load_cities'),
         #path('logout/', Signout, name='logout'),
         path('login/', login_view, name='login'),
@@ -21,6 +23,6 @@ urlpatterns = [
         # path('search/', MelkFilterView, name='melk_search'),
         path('upload/', Upload_view, name='upload'),
         path('<int:id>/melkdelete/', MelkDeleteView, name='melk_delete'),
-
+        
 ]
 

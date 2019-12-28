@@ -1,6 +1,12 @@
 import django.shortcuts
+import csv,io
+import logging
+from django.urls import reverse
 #from .filters import MelkFilter
-
+from django.http import HttpResponseRedirect,HttpResponse
+from django.shortcuts import render
+#from .forms import UploadFileForm
+# from somewhere import handle_uploaded_file
 from django.http import JsonResponse
 from .models import Melk, Unit, City, Ostan, Rosta
 from django.conf import settings
@@ -16,6 +22,7 @@ from django.contrib.auth import (
     logout
 )
 from django.shortcuts import render
+from click import prompt
 
 
 # @login_required
@@ -210,3 +217,36 @@ def MelkDeleteView(request, id):
        post.delete()
        return django.shortcuts.HttpResponseRedirect(post.get_absolute_url())
     return django.shortcuts.render (request, "core/confirm_melk.html", {"post":post})
+
+def upload_csv(request):
+    template = "core\csvupload.html"
+    prompt= {'order':'فایل شما دارای کدمنطقه و نام منطقه باشد.'}
+    if request.method=="GET":
+       return render(request, template, prompt)
+    csv_file = request.FILES['file']
+
+    if not csv_file.name.endswith('.csv'):
+        messages.error(request, 'این فایل csv نیست')
+    data_set = csv_file.read().decode('UTF-8')
+    io_string = io.StringIO(data_set)
+    next(io_string)
+    for column in csv.reader(io_string, delimiter=',',quotechar="|"):
+        _,created = Unit.objects.update_or_create(
+            u_code=column[0],
+            u_name=column[1],
+        )
+    context={}
+    return render(request,template,context)
+def download_csv(request):
+    items = Unit.objects.all()
+
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="unit.csv"'
+    writer = csv.writer(response,delimiter=',')
+    writer.writerow(['u_code','u_name'])
+
+    for obj in items:
+        writer.writerow([obj.u_code,obj.u_name])
+    return response
+    
+

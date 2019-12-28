@@ -72,6 +72,7 @@ INSTALLED_APPS = [
     'ckeditor',
     #'ckeditor_uploader',
     'rest_framework',
+    'csvimport.app.CSVImportConf',  # use AppConfig for django >=1.7 csvimport >=2.2
 ]
 
 
