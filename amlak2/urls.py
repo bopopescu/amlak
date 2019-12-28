@@ -23,6 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
     path('core/', include('core.urls',namespace='core')),
+    path('report_builder/', include('report_builder.urls')),
 ]
 
 # urlpatterns += static(settings.MEDIA_URL, document_root= settings.MEDIA_ROOT)

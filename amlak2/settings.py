@@ -72,6 +72,7 @@ INSTALLED_APPS = [
     'ckeditor',
     #'ckeditor_uploader',
     'rest_framework',
+    'report_builder',
     'csvimport.app.CSVImportConf',  # use AppConfig for django >=1.7 csvimport >=2.2
 ]
 
@@ -82,8 +83,15 @@ REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 3,
 
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+       
+        'rest_framework.authentication.SessionAuthentication',
+    ),
+
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
+
+    
     ]
 }
 
@@ -141,6 +149,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.core.context_processors.static',
+                'django.core.context_processors.media',
             ],
         },
     },
