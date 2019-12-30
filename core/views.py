@@ -4,6 +4,7 @@ import logging
 from django.urls import reverse
 #from .filters import MelkFilter
 from django.http import HttpResponseRedirect,HttpResponse
+
 from django.shortcuts import render
 #from .forms import UploadFileForm
 # from somewhere import handle_uploaded_file
@@ -189,7 +190,7 @@ def MelkUpdateView(request):
 
     melksearch1 = request.POST.get('melksearch')
     # post = MelkFilter(request.GET, queryset=Melk.objects.all())
-
+    
     if is_valid_queryparam(melksearch1):
        post = post.filter(melk_name = melksearch1)
    
@@ -250,3 +251,10 @@ def download_csv(request):
     return response
     
 
+
+# def my_report(request):
+# # Initialise the report
+#     template = "myapp/my_report.html"
+#     report = MyReport()
+#     context = {'report': report}
+#     return render(request, template, context)

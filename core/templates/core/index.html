@@ -76,7 +76,7 @@
                     </li>  
                     <li>
                       <a href="{% url 'core:melk_update' %}" class="top-menu"> 
-                      <span class="glyphicon glyphicon-plus"></span>ویرایش ملک</a>
+                      <span class="glyphicon glyphicon-plus"></span>لیست املاک</a>
                     </li>                        
                   </ul>
                 </div>
@@ -430,7 +430,11 @@
         });
       });
     </script>
-    
+    <script>
+      $(document).ready(function() {
+      $('#example').DataTable();
+      } );
+    </script>
 
 
     {% comment %} <script src="{% static 'js/django_jalali.min.js' %}"></script> {% endcomment %}

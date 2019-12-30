@@ -14,6 +14,9 @@ from django_filters.rest_framework.filters import ModelChoiceFilter
 
 
 
+
+
+
 class Location( models.Model ):
     location_point = models.PointField( null=True, blank=True )
 # class Location(models.Model):

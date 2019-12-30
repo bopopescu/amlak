@@ -1,5 +1,6 @@
 from django.urls import path,include
 from .views import *
+
 # from django.conf import settings
 #from .views import MapWidgetListView, PointFieldGoogleWidgetView, PointFieldGoogleStaticWidgetView, PointFieldGoogleStaticOverlayWidgetView
 app_name = 'core'
