@@ -6,26 +6,22 @@
     <meta charset="utf-8">
     <meta content="ie=edge" http-equiv="x-ua-compatible">
     <meta content="template language" name="keywords">
-    <meta content="Tamerlan Soziev" name="author">
+    {% comment %} <meta content="Tamerlan Soziev" name="author">
     <meta content="Admin dashboard html template" name="description">
-    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <meta content="width=device-width, initial-scale=1" name="viewport">{% endcomment %}
+    {% comment %} <link href=" //cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css"> {% endcomment %}
+    {% comment %} <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css"> {% endcomment %}
     <link href="favicon.png" rel="shortcut icon">
-    <link href="apple-touch-icon.png" rel="apple-touch-icon">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    {% comment %} <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500" rel="stylesheet" type="text/css"> {% endcomment %}
-    {% comment %} <link href="{% static '/bower_components/select2/dist/css/select2.min.css'%}" rel="stylesheet"> {% endcomment %}
-    <link href="{% static '/bower_components/bootstrap-daterangepicker/daterangepicker.css'%}" rel="stylesheet">
-    {% comment %} <link href="{% static 'jquery.ui.datepicker.jalali/themes/base/jquery-ui.min.css' %}" rel="stylesheet">   {% endcomment %}
-    <link href="{% static '/bower_components/dropzone/dist/dropzone.css'%}" rel="stylesheet">
-    <link href="{% static '/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css'%}" rel="stylesheet">
+    <link href="apple-touch-icon.png" rel="apple-touch-icon"> 
+    <link href="{% static 'bower_components/bootstrap-daterangepicker/daterangepicker.css'%}" rel="stylesheet">
+    <link href="{% static 'bower_components/dropzone/dist/dropzone.css'%}" rel="stylesheet">
+    <link href="{% static 'bower_components/datatables.net-bs/css/dataTables.bootstrap.css'%}" rel="stylesheet"> 
     <link href="{% static '/bower_components/fullcalendar/dist/fullcalendar.min.css'%}" rel="stylesheet">
-    <link href="{% static '/bower_components/perfect-scrollbar/css/perfect-scrollbar.min.css'%}" rel="stylesheet">
-    <link href="{% static '/bower_components/slick-carousel/slick/slick.css'%}" rel="stylesheet">
+    <link href="{% static 'bower_components/perfect-scrollbar/css/perfect-scrollbar.min.css'%}" rel="stylesheet">
+    <link href="{% static 'bower_components/slick-carousel/slick/slick.css'%}" rel="stylesheet">
     <link href="{% static 'css/main.css'%}" rel="stylesheet"> 
-    <link href="{% static 'css/dashicons.css'%}" rel="stylesheet"> 
-    {% comment %} <link href="{% static 'css/bootstrap.rtl.css'%}" rel="stylesheet"> {% endcomment %}
-    {% comment %} <link href='https://api.mapbox.com/mapbox-gl-js/v1.3.1/mapbox-gl.css' rel='stylesheet' /> {% endcomment %}
+    {% comment %} <link href="{% static 'css/dashicons.css'%}" rel="stylesheet">  {% endcomment %}
+    
   </head>
   <body class="menu-position-side menu-side-left full-screen with-content-panel">
 
@@ -294,63 +290,7 @@
             </div>
           </div>
         </div>
-           {% comment %}<div class="top-menu-controls" style=" width: 100%;"> 
-              <div class="element-search autosuggest-search-activator">
 
-                <input placeholder="متن خود را جستجو کنید..." type="text">
-              </div>
-              <!--------------------
-              START - User avatar and menu in secondary top menu
-              -------------------->
-              <div class="logged-user-w">
-                <div class="logged-user-i">
-                  <div class="avatar-w">
-                    <img alt="" src="{{user.profile.image.url}}">
-                  </div>
-                  <div class="logged-user-menu color-style-bright" >
-                    <div class="logged-user-avatar-info">
-                      <div class="avatar-w">
-                        <img alt="" src="{{user.profile.image.url}}">
-                      </div>
-                      <div class="logged-user-info-w" >
-                        <div class="logged-user-name">
-                          {{ user.first_name }} {{ user.last_name }}
-                        </div>
-                        <div class="logged-user-role">
-                         مدیر سایت
-                        </div>
-                      </div>
-                    </div>
-                    <div class="bg-icon">
-                      <i class="os-icon os-icon-wallet-loaded"></i>
-                    </div>
-                    <ul>
-                      <li>
-                        <a href="apps_email.html"><i class="os-icon os-icon-mail-01"></i><span>ایمیل وارده</span></a>
-                      </li>
-                      <li>
-                        <a href="#"><i class="os-icon os-icon-user-male-circle2"></i><span>پروفایل</span></a>
-                      </li>
-                      
-                      <li>
-                        <a href="{% url 'core:unit_search' %}"><i class="os-icon os-icon-others-43"></i><span>جستجو</span></a>
-                      </li>
-                      <li>
-                        <a href="{% url 'core:logout'%}"><i class="os-icon os-icon-signs-11"></i><span>خروج</span></a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-              <!--------------------
-              END - User avatar and menu in secondary top menu
-              -------------------->
-            </div>
-            <!--------------------
-            END - Top Menu Controls
-            -------------------->
-          
-          </div> {% endcomment %}
           <!--------------------
           شروع محتوای اصلی سایت
           -------------------->
@@ -372,14 +312,19 @@
       
     </div>
 
-<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.39.1/mapbox-gl.js'></script>
-    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.39.1/mapbox-gl.css' rel='stylesheet' />
-    <script src='https://api.mapbox.com/mapbox-gl-js/v1.3.1/mapbox-gl.js'></script>
+    {% comment %} <script type="text/javascript" src="DataTables/datatables.min.js"></script> {% endcomment %}
+    {% comment %} <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.10.20/af-2.3.4/b-1.6.1/b-colvis-1.6.1/b-flash-1.6.1/b-html5-1.6.1/b-print-1.6.1/fc-3.3.0/kt-2.5.1/r-2.2.3/rg-1.1.1/sl-1.3.1/datatables.min.js"></script> {% endcomment %}
+    {% comment %} <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> {% endcomment %}
+    {% comment %} <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> {% endcomment %}
+    {% comment %} <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.39.1/mapbox-gl.js'></script> {% endcomment %}
+    {% comment %} <script src= "{% static '/datatables/datatables.min.js' %}"></script> {% endcomment %}
+    
+    {% comment %} <script src='https://api.mapbox.com/mapbox-gl-js/v1.3.1/mapbox-gl.js'></script> {% endcomment %}
     <script src="{% static 'bower_components/popper.js/dist/umd/popper.min.js'%}"></script>
-    <script src="{% static 'bower_components/jquery/dist/jquery.min.js'%}"></script>
-    {% comment %} <script>window.CKEDITOR_BASEPATH = '/my_static/ckeditor/ckeditor/';</script>
-    <script type="text/javascript" src="{% static "ckeditor/ckeditor-init.js" %}"></script>
-    <script type="text/javascript" src="{% static "ckeditor/ckeditor/ckeditor.js" %}"></script> {% endcomment %}
+    <script src="{% static '/bower_components/jquery/dist/jquery.min.js'%}"></script>
+    
     <script src="{% static 'bower_components/moment/moment.js'%}"></script>
     <script src="{% static 'bower_components/chart.js/dist/Chart.min.js'%}"></script>
     <script src="{% static 'bower_components/select2/dist/js/select2.full.min.js'%}"></script>
@@ -389,9 +334,11 @@
     <script src="{% static 'bower_components/bootstrap-daterangepicker/daterangepicker.js'%}"></script>
     <script src="{% static 'bower_components/ion.rangeSlider/js/ion.rangeSlider.min.js'%}"></script>
     <script src="{% static 'bower_components/dropzone/dist/dropzone.js'%}"></script>
-    <script src="{% static 'bower_components/editable-table/mindmup-editabletable.js'%}"></script>
+    {% comment %} <script src="{% static 'bower_components/editable-table/mindmup-editabletable.js'%}"></script> {% endcomment %}
     <script src="{% static 'bower_components/datatables.net/js/jquery.dataTables.min.js'%}"></script>
-    <script src="{% static 'bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js'%}"></script>
+    <script src="{% static 'bower_components/datatables.net-bs/js/dataTables.bootstrap4.min.js'%}"></script> 
+    {% comment %} <script src="//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script> {% endcomment %}
+    {% comment %} <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script> {% endcomment %}
     <script src="{% static 'bower_components/fullcalendar/dist/fullcalendar.min.js'%}"></script>
     <script src="{% static 'bower_components/perfect-scrollbar/js/perfect-scrollbar.jquery.min.js'%}"></script>
     <script src="{% static 'bower_components/tether/dist/js/tether.min.js'%}"></script>
@@ -407,7 +354,10 @@
     <script src="{% static 'bower_components/bootstrap/js/dist/tooltip.js'%}"></script>
     <script src="{% static 'bower_components/bootstrap/js/dist/popover.js'%}"></script>
     <script src="{% static 'js/demo_customizer.js'%}"></script>
-    <script src="{% static 'js/main.js'%}"></script>
+    <script src="{% static '/js/main.js'%}"></script>
+    
+
+    
     {% comment %} <script>
       $(document).ready(function(){
         $("#myInput").on("keyup", function() {
@@ -419,22 +369,37 @@
       });
     </script> {% endcomment %}
 
+    <script>
+
+    $(document).ready(function () {
+    $("#example").DataTable({      
     
-    <script>
-      $(document).ready(function(){
-        $("#myInput").on("keyup", function() {
-          var value = $(this).val().toLowerCase();
-          $("#myTable tr").filter(function() {
-            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-          });
-        });
-      });
-    </script>
-    <script>
-      $(document).ready(function() {
-      $('#example').DataTable();
-      } );
-    </script>
+      autoFill: true,
+      fixedColumns: true,
+      responsive: true,
+    })
+     
+
+    });
+
+
+</script>
+
+    {% comment %} <script>
+      $(document).ready(function () {
+        $('#dataTable1').DataTable (  
+          {
+            "language": {
+                "url": "dataTables.german.lang"
+            }
+        } );
+
+          
+          })
+        
+       
+      
+    </script> {% endcomment %}
 
 
     {% comment %} <script src="{% static 'js/django_jalali.min.js' %}"></script> {% endcomment %}

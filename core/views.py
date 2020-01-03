@@ -74,28 +74,33 @@ def logout_view(request):
 def UnitCreateView(request):
     form = UnitForm(request.POST or None)
     post = Unit.objects.all()
+    ucode = request.POST.get('u_code')
     
-    if form.is_valid():
-        postss= form.save()
-        messages.success(request,"ثبت با موفقیت انجام شد...")
-        form = UnitForm()
-        return django.shortcuts.HttpResponseRedirect(postss.get_absolute_url())
+    if ucode !='' or None:
+        if post.filter(u_code = ucode):
+            messages.success(request,"منطقه مورد نظر قبلا ثبت شده است")
+        elif form.is_valid():
+            postss= form.save()
+            messages.success(request,"ثبت با موفقیت انجام شد...")
+            form = UnitForm()
+            return django.shortcuts.HttpResponseRedirect(postss.get_absolute_url())
+    
    
-    unit_list = Unit.objects.all()
-    page = request.GET.get('page', 1)
-    paginator1 = Paginator(unit_list, 5 ) # Show 5 unit per page  
+    # unit_list = Unit.objects.all()
+    # page = request.GET.get('page', 1)
+    # paginator1 = Paginator(unit_list, 10 ) # Show 5 unit per page  
     
-    try:
-        posts=paginator1.page(page)
-    except PageNotAnInteger:     
-        posts=paginator1.page(1)
-    except(EmptyPage):
-       posts = paginator1.page(paginator1.num_pages)
+    # try:
+    #     posts=paginator1.page(page)
+    # except PageNotAnInteger:     
+    #     posts=paginator1.page(1)
+    # except(EmptyPage):
+    #    posts = paginator1.page(paginator1.num_pages)
 
     context = {
       "post":post,
       "form":form,
-      "posts":posts, 
+    #   "posts":posts, 
     }
     return django.shortcuts.render(request, 'core/unit_edit.html', context)
 
@@ -113,21 +118,21 @@ def UnitUpdateView(request, id):
         form.save()
         messages.success(request,"ویرایش با موفقیت انجام شد...")
         return django.shortcuts.HttpResponseRedirect(postt.get_absolute_url())
-    unit_list = Unit.objects.all()
-    paginator = Paginator(unit_list, 5 ) # Show 5 unit per page
-    try:
-        page = int(request.GET.get('page', '1' ))
-    except:
-        page = 1
-    try:
-        posts=paginator.page(page)
-    except(EmptyPage):
-       posts = paginator.page(paginator.num_pages)
+    # unit_list = Unit.objects.all()
+    # paginator = Paginator(unit_list, 10 ) # Show 5 unit per page
+    # try:
+    #     page = int(request.GET.get('page', '1' ))
+    # except:
+    #     page = 1
+    # try:
+    #     posts=paginator.page(page)
+    # except(EmptyPage):
+    #    posts = paginator.page(paginator.num_pages)
     context = {
       "postt":postt,
       "post":post,
       "form":form,
-      "posts":posts,   
+    #   "posts":posts,   
     }
     return django.shortcuts.render(request, 'core/unit_update.html', context)
     
@@ -154,17 +159,21 @@ def Upload_view(request):
 
 
 def MelkCreateView(request):
-    # if not request.user.is_authenticated :
-    #     return django.shortcuts.render (request, 'core/404err.html')
-    #postt = get_object_or_404(Ostan,id=id)
-    # ostan_id = request.GET.get('ostan')
-    # cities = City.objects.filter(ostan_id=ostan_id).order_by('name')
+   
     form = MelkForm(request.POST or None, request.FILES or None)
+    post = Melk.objects.all()
+    ostan1 = Ostan.objects.all()
+    city1=City.objects.all()
+    sanadasli = request.POST.get('sanad_asli')
     
-    if form.is_valid():
-        post = form.save()
-        messages.success(request, "ثبت با موفقیت انجام شد...")
-        return django.shortcuts.HttpResponseRedirect(post.get_absolute_url())
+    if sanadasli !='' or None:
+        if post.filter(sanad_asli = sanadasli):
+            messages.success(request,"این سند قبلا ثبت شده است")
+    
+        elif form.is_valid():
+            post = form.save()
+            messages.success(request, "ثبت با موفقیت انجام شد...")
+            return django.shortcuts.HttpResponseRedirect(post.get_absolute_url())
         # else :
         #     messages.error(request, "فرم قانونی نیست")
 
@@ -174,14 +183,7 @@ def MelkCreateView(request):
         }
     return django.shortcuts.render (request, 'core/melk_insert1.html', context)
 
-# def load_cities(request):
-#     ostan_id = request.GET.get('ostan')
-#     cities = City.objects.filter(ostan_id=ostan_id).order_by('name')
-#     return render(request, 'core/melk_insert1.html', {'cities': cities})
 
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         return context
 def is_valid_queryparam(param):
    return param != '' and param is not None
 
@@ -194,18 +196,18 @@ def MelkUpdateView(request):
     if is_valid_queryparam(melksearch1):
        post = post.filter(melk_name = melksearch1)
    
-    paginator = Paginator(post, 3 ) # Show 5 unit per page
-    try:
-        page = int(request.GET.get('page', '1' ))
-    except:
-        page = 1
-    try:
-        posts=paginator.page(page)
-    except(EmptyPage):
-       posts = paginator.page(paginator.num_pages)
+    # paginator = Paginator(post, 15 ) # Show 5 unit per page
+    # try:
+    #     page = int(request.GET.get('page', '1' ))
+    # except:
+    #     page = 1
+    # try:
+    #     posts=paginator.page(page)
+    # except(EmptyPage):
+    #    posts = paginator.page(paginator.num_pages)
     context = {
       "post":post,   
-      "posts":posts,   
+    #   "posts":posts,   
     }
 
     return django.shortcuts.render (request, 'core/melk_update.html', context) 
@@ -233,8 +235,8 @@ def upload_csv(request):
     next(io_string)
     for column in csv.reader(io_string, delimiter=',',quotechar="|"):
         _,created = Unit.objects.update_or_create(
-            u_code=column[0],
-            u_name=column[1],
+            u_name=column[0],
+            u_code=column[1],
         )
     context={}
     return render(request,template,context)

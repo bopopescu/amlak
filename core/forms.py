@@ -115,7 +115,7 @@ class MelkForm( forms.ModelForm ):
                 'melk_comment' : forms.Textarea( attrs={'class':'form-control'} ),
                 'melk_pic' : forms.FileInput( attrs={'class':'form-control'} ),
                 'ostan': forms.Select( attrs={'class':'form-control'} ),
-                'city' : forms.Select( attrs={'class':'form-control'} ),
+                'city' : forms.Select( attrs={'class':'form-control'}),
                 'rosta' : forms.Select( attrs={'class':'form-control'} ),
                 'post_code': forms.NumberInput( attrs={'class':'form-control'} ),
                 'address' : forms.TextInput( attrs={'class':'form-control'} ),

@@ -131,9 +131,3 @@ class Melk(django.db.models.Model):
     def get_absolute_url(self):
         return reverse("core:melk_insert", kwargs={})
 
-# class MelkFilter(FilterSet):
-   
-#     class Meta:
-#         model = Melk
-#         fields = '__All__'
-#         # fields = ['...']
