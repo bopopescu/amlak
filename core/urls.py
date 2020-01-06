@@ -24,6 +24,7 @@ urlpatterns = [
         # path('search/', MelkFilterView, name='melk_search'),
         path('upload/', Upload_view, name='upload'),
         path('<int:id>/melkdelete/', MelkDeleteView, name='melk_delete'),
+        path('brand/<int:id>', all_json_models),
         
 ]
 

@@ -1,5 +1,5 @@
 import django.shortcuts
-import csv,io
+import csv,io, json
 import logging
 from django.urls import reverse
 #from .filters import MelkFilter
@@ -8,7 +8,7 @@ from django.http import HttpResponseRedirect,HttpResponse
 from django.shortcuts import render
 #from .forms import UploadFileForm
 # from somewhere import handle_uploaded_file
-from django.http import JsonResponse
+from django.http import JsonResponse, request
 from .models import Melk, Unit, City, Ostan, Rosta
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
@@ -24,6 +24,7 @@ from django.contrib.auth import (
 )
 from django.shortcuts import render
 from click import prompt
+from django.core import serializers
 
 
 # @login_required
@@ -176,9 +177,15 @@ def MelkCreateView(request):
             return django.shortcuts.HttpResponseRedirect(post.get_absolute_url())
         # else :
         #     messages.error(request, "فرم قانونی نیست")
-
+    ostan_id = request.GET.get('ostanid')
+    cities = City.objects.filter(ostan_id=ostan_id).order_by('name')
+    city_id = request.GET.get('cityid')
+    rosta = Rosta.objects.filter(city_id=city_id).order_by('name')
+   
     context = {
       "form":form,
+      "cities" :cities,
+      "rosta":rosta,
     #   "cities": cities
         }
     return django.shortcuts.render (request, 'core/melk_insert1.html', context)
@@ -205,8 +212,14 @@ def MelkUpdateView(request):
     #     posts=paginator.page(page)
     # except(EmptyPage):
     #    posts = paginator.page(paginator.num_pages)
+    ostan_id = request.GET.get('ostan')
+    cities = City.objects.filter(ostan_id=ostan_id).order_by('name')
+    city_id = request.GET.get('city')
+    rosta = Rosta.objects.filter(city_id=city_id).order_by('name')
     context = {
-      "post":post,   
+      "post":post,  
+      "cities" :cities,
+      "rostas":rosta,
     #   "posts":posts,   
     }
 
@@ -254,9 +267,9 @@ def download_csv(request):
     
 
 
-# def my_report(request):
-# # Initialise the report
-#     template = "myapp/my_report.html"
-#     report = MyReport()
-#     context = {'report': report}
-#     return render(request, template, context)
+def all_json_models(request, id):
+    current_brand = Ostan.objects.get(code=id)
+    models = City.objects.all().filter(brand=current_brand)
+    json_models = serializers.serialize("json", models)
+    return HttpResponse(json_models, mimetype="application/javascript")
+

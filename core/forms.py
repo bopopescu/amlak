@@ -123,8 +123,28 @@ class MelkForm( forms.ModelForm ):
         }
 
 
-    # def __init__(self, *args, **kwargs):
-    #         super().__init__(*args, **kwargs)
-    #         self.fields['ostan'].queryset = Ostan.objects.all()
-    #         self.fields['city'].queryset = City.objects.filter(ostan_id = Ostan.id()).order_by('name')
-    #         self.fields['rosta'].queryset = Rosta.objects.all()
+        def __init__(self, *args, **kwargs):
+            super().__init__(*args, **kwargs)
+            self.fields['city'].queryset = City.objects.none()
+
+            if 'ostan' in self.data:
+                try:
+                    ostan_id = int(self.data.get('ostanid'))
+                    self.fields['ostanid'].queryset = City.objects.filter(ostan_id=ostan_id).order_by('name')
+                except (ValueError, TypeError):
+                    pass  # invalid input from the client; ignore and fallback to empty City queryset
+            elif self.instance.pk:
+                self.fields['cityid'].queryset = self.instance.ostan.city_set.order_by('name')
+
+        def __init__(self, *args, **kwargs):
+            super().__init__(*args, **kwargs)
+            self.fields['rosta'].queryset = Rosta.objects.none()
+
+            if 'cityid' in self.data:
+                try:
+                    city_id = int(self.data.get('cityid'))
+                    self.fields['rosta'].queryset = Rosta.objects.filter(city_id=city_id).order_by('name')
+                except (ValueError, TypeError):
+                    pass  # invalid input from the client; ignore and fallback to empty District queryset
+            elif self.instance.pk:
+                self.fields['rosta'].queryset = self.instance.city.rosta_set.order_by('name')
