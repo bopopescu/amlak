@@ -57,6 +57,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     #'reporting',
+    'leaflet',
     'core.apps.CoreConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -66,17 +67,28 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.gis',
     'crispy_forms',
-    'django_jalali',
+    'jalali_date',
+   
+    # 'django_jalali',
     'bootstrap4',
     'django_filters',
     'cleanup',
     'ckeditor',
+   
+    # 'djmoney',
+    'django.contrib.humanize',
     #'report_tools',
     #'reports',
     #'ckeditor_uploader',
     'rest_framework',
     'report_builder',
+    #'djgeojson',
     'csvimport.app.CSVImportConf',  # use AppConfig for django >=1.7 csvimport >=2.2
+     
+   
+    'leaflet_point',
+    'location_field.apps.DefaultConfig',
+    #'mapbox_location_field',
 ]
 
 
@@ -99,37 +111,6 @@ REST_FRAMEWORK = {
     
     ]
 }
-
-LOCATION_FIELD = {
-    'map.provider': 'openstreetmap',
-    'map.zoom': 15,
-
-    'search.provider': 'google',
-    'search.suffix': '',
-
-    # # Google
-    # 'provider.google.api': '//maps.google.com/maps/api/js?sensor=false',
-    # 'provider.google.api_key': '<INSERT GOOGLE API KEY>',
-    # 'provider.google.api_libraries': '',
-    # 'provider.google.map.type': 'ROADMAP',
-    #
-    # # Mapbox
-    # 'provider.mapbox.access_token': '',
-    # 'provider.mapbox.max_zoom': 18,
-    # 'provider.mapbox.id': 'mapbox.streets',
-
-    # OpenStreetMap
-    'provider.openstreetmap.max_zoom': 16,
-
-    # # misc
-    # 'resources.root_path': LOCATION_FIELD_PATH,
-    # 'resources.media': {
-    #     'js': (
-    #         LOCATION_FIELD_PATH + '/js/form.js',
-    #     ),
-    # },
-}
-
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -220,6 +201,35 @@ USE_L10N = True
 
 USE_TZ = True
 
+# defaults
+
+JALALI_DATE_DEFAULTS = {
+   'Strftime': {
+        'date': '%y/%m/%d',
+        'datetime': '%H:%M:%S _ %y/%m/%d',
+    },
+    'Static': {
+        'js': [
+            # loading default jQuery
+            'admin/jquery.ui.datepicker.jalali/scripts/jquery-1.10.2.min.js',
+            # loading datepicker
+            'admin/js/django_jalali.min.js',
+            # OR
+            # 'admin/jquery.ui.datepicker.jalali/scripts/jquery-1.10.2.min.js',
+            # 'admin/jquery.ui.datepicker.jalali/scripts/jquery.ui.core.js',
+            # 'admin/jquery.ui.datepicker.jalali/scripts/calendar.js',
+            # 'admin/jquery.ui.datepicker.jalali/scripts/jquery.ui.datepicker-cc.js',
+            # 'admin/jquery.ui.datepicker.jalali/scripts/jquery.ui.datepicker-cc-fa.js',
+            # 'admin/js/main.js',
+        ],
+        'css': {
+            'all': [
+                'admin/jquery.ui.datepicker.jalali/themes/base/jquery-ui.min.css',
+            ]
+        }
+    },
+}
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
@@ -237,4 +247,50 @@ LOGIN_REDIRECT_URL = 'index'
 # CKEDITOR_UPLOAD_PATH = os.path.join(BASE_DIR, 'media')
 
 
+USE_THOUSAND_SEPARATOR = True
 
+# LEAFLET_CONFIG = {
+#     # 'OVERLAYS': [('Cadastral', 'http://server/a/{z}/{x}/{y}.png', {'attribution': '&copy; IGN'})],
+#     'DEFAULT_CENTER': (36.5, 59.5),
+#     'DEFAULT_ZOOM': 7,
+#     'MIN_ZOOM': 3,
+#     'MAX_ZOOM': 18,
+#     'RESET_VIEW': False,
+    
+# #     'PLUGINS': {
+# #     'name-of-plugin': {
+# #         'css': ['relative/path/to/stylesheet.css', '/root/path/to/stylesheet.css'],
+# #         'js': 'http://absolute-url.example.com/path/to/script.js',
+# #         'auto-include': True,
+# #     },
+   
+# # },
+# }
+LEAFLET_CONFIG = {
+    # 'OVERLAYS': [('Cadastral', 'http://server/a/{z}/{x}/{y}.png', {'attribution': '&copy; IGN'})],
+    'DEFAULT_CENTER': (36.5, 59.5),
+    'DEFAULT_ZOOM': 5,
+    'MIN_ZOOM': 1,
+    'MAX_ZOOM': 15,
+    'RESET_VIEW': False,
+    
+#     'PLUGINS': {
+#     'name-of-plugin': {
+#         'css': ['relative/path/to/stylesheet.css', '/root/path/to/stylesheet.css'],
+#         'js': 'http://absolute-url.example.com/path/to/script.js',
+#         'auto-include': True,
+#     },
+   
+# },
+}
+
+LEAFLET_POINT_CONFIG = {
+     # these are defaults...
+     'map_height': 400,
+     'tile_layer': 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+     'attibution': '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+     'initial_lat': 51.4825,
+     'initial_lng': 0,
+     'initial_zoom': 15,
+     'geocoder': False
+ }

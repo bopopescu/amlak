@@ -7,9 +7,10 @@
 <div>
 <form method="POST" action="{% url 'core:melk_insert' %}" enctype="multipart/form-data" >
     {% csrf_token %}
+    <div >
     {{form|crispy}}
     {% comment %} {{ form|safe }} {% endcomment %}
-
+    </div>
     <div class="form-buttons-w">
         <button class="btn btn-primary" type="submit"> ثبت</button>
     </div>

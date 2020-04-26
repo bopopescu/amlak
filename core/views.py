@@ -9,7 +9,7 @@ from django.shortcuts import render
 #from .forms import UploadFileForm
 # from somewhere import handle_uploaded_file
 from django.http import JsonResponse, request
-from .models import Melk, Unit, City, Ostan, Rosta
+from .models import Melk, Unit, City, Ostan
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
 from .forms import UnitForm, MelkForm, UserLoginForm, UserRegisterForm
@@ -22,10 +22,13 @@ from django.contrib.auth import (
     login,
     logout
 )
-from django.shortcuts import render
+
 from click import prompt
 from django.core import serializers
+from jalali_date import datetime2jalali, date2jalali
 
+# def my_view(request):
+# 	jalali_join = datetime2jalali(request.user.date_joined).strftime('%y/%m/%d _ %H:%M:%S')
 
 # @login_required
 def index_view(request):
@@ -160,34 +163,34 @@ def Upload_view(request):
 
 
 def MelkCreateView(request):
-   
+    # jalali_join = datetime2jalali(request.user.date_joined).strftime('%y/%m/%d _ %H:%M:%S')
+    
     form = MelkForm(request.POST or None, request.FILES or None)
     post = Melk.objects.all()
-    ostan1 = Ostan.objects.all()
-    city1=City.objects.all()
     sanadasli = request.POST.get('sanad_asli')
     
     if sanadasli !='' or None:
+        
+        
         if post.filter(sanad_asli = sanadasli):
             messages.success(request,"این سند قبلا ثبت شده است")
-    
+        
         elif form.is_valid():
+            
             post = form.save()
             messages.success(request, "ثبت با موفقیت انجام شد...")
             return django.shortcuts.HttpResponseRedirect(post.get_absolute_url())
-        # else :
-        #     messages.error(request, "فرم قانونی نیست")
-    ostan_id = request.GET.get('ostanid')
-    cities = City.objects.filter(ostan_id=ostan_id).order_by('name')
-    city_id = request.GET.get('cityid')
-    rosta = Rosta.objects.filter(city_id=city_id).order_by('name')
-   
+        else :
+            messages.error(request, "فرم قانونی نیست")
+    # ostan_id = request.GET.get('ostanid')
+    # cities = City.objects.filter(ostan_id=ostan_id).order_by('name')
+    # city_id = request.GET.get('cityid')
+    
+    
     context = {
       "form":form,
-      "cities" :cities,
-      "rosta":rosta,
-    #   "cities": cities
-        }
+      "post":post,
+    }
     return django.shortcuts.render (request, 'core/melk_insert1.html', context)
 
 
@@ -215,11 +218,11 @@ def MelkUpdateView(request):
     ostan_id = request.GET.get('ostan')
     cities = City.objects.filter(ostan_id=ostan_id).order_by('name')
     city_id = request.GET.get('city')
-    rosta = Rosta.objects.filter(city_id=city_id).order_by('name')
+    # rosta = Rosta.objects.filter(city_id=city_id).order_by('name')
     context = {
       "post":post,  
       "cities" :cities,
-      "rostas":rosta,
+    #   "rostas":rosta,
     #   "posts":posts,   
     }
 
@@ -247,12 +250,14 @@ def upload_csv(request):
     io_string = io.StringIO(data_set)
     next(io_string)
     for column in csv.reader(io_string, delimiter=',',quotechar="|"):
-        _,created = Unit.objects.update_or_create(
-            u_name=column[0],
-            u_code=column[1],
+        _,created = City.objects.update_or_create(
+            id=column[0],
+            name=column[1],
+            ostan_id=column[2],
         )
     context={}
     return render(request,template,context)
+
 def download_csv(request):
     items = Unit.objects.all()
 

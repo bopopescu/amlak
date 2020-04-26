@@ -2,29 +2,34 @@
 import django.db
 import ckeditor
 import django_filters
+
 from django_jalali.db import models as jmodels
 from django.urls import reverse
 from django.contrib.gis.db import models
 from ckeditor.fields import RichTextField
 #from ckeditor_uploader.fields import RichTextUploadField
-from django.contrib.gis.gdal import DataSource
+from django.contrib.gis.geos import Point
 from location_field.models.spatial import LocationField
-from django.contrib.gis.gdal.geometries import Point
+# from django.contrib.gis.db.models import PointField
+from location_field.models.plain import PlainLocationField
+
+# from location_field.models.spatial import LocationField
+# from django.contrib.gis.gdal.geometries import Point
 from django_filters.rest_framework.filters import ModelChoiceFilter
+from django.forms import ModelChoiceField
+# from djmoney.models.fields import MoneyField
 
 
 
 
+# class Location( models.Model ):
+#     location_point = models.PointField( null=True, blank=True )
+# # class Location(models.Model):
+# #         location_point = LocationField(based_fields=['city'], zoom=7, default=Point(51.67, 32.65), null=True, blank=True)
 
-
-class Location( models.Model ):
-    location_point = models.PointField( null=True, blank=True )
-# class Location(models.Model):
-#         location_point = LocationField(based_fields=['city'], zoom=7, default=Point(51.67, 32.65), null=True, blank=True)
-
-    class Meta:
-        verbose_name = 'موقعیت'
-        verbose_name_plural = 'موقعیت جغرافیایی'
+#     class Meta:
+#         verbose_name = 'موقعیت'
+#         verbose_name_plural = 'موقعیت جغرافیایی'
 
 class Ostan(django.db.models.Model):
     name = django.db.models.CharField(max_length=20, verbose_name="استان")
@@ -42,20 +47,15 @@ class City(django.db.models.Model):
     class Meta:
         verbose_name = 'شهر'
         verbose_name_plural = 'شهرستان'
-# class CityFilter(django_filters.FilterSet):
-#     class Meta:
-#        model= City
-
-#        fields = ['id','name']
         
-class Rosta(django.db.models.Model):
-    city = django.db.models.ForeignKey(City,blank=True, on_delete=models.SET_NULL, null=True,verbose_name ='شهرستان')
-    name = django.db.models.CharField(max_length=50, verbose_name="روستا")
-    def __str__(self):
-        return self.name
-    class Meta:
-        verbose_name = 'روستا'
-        verbose_name_plural = 'دهستان'
+# class Rosta(django.db.models.Model):
+#     city = django.db.models.ForeignKey(City,blank=True, on_delete=models.SET_NULL, null=True,verbose_name ='شهرستان')
+#     name = django.db.models.CharField(max_length=50, verbose_name="روستا")
+#     def __str__(self):
+#         return self.name
+#     class Meta:
+#         verbose_name = 'روستا'
+#         verbose_name_plural = 'دهستان'
 
 class Unit(django.db.models.Model):
     u_code = django.db.models.CharField(max_length=40, verbose_name="کد منطقه")
@@ -107,19 +107,21 @@ class Melk(django.db.models.Model):
 
         )
     melk_karbari = django.db.models.CharField(choices=CHOICES2,max_length=50, verbose_name="نوع کاربری ملک")
-    melk_year = jmodels.jDateField(verbose_name="سال واگذاری ملک")
-    melk_arseh = django.db.models.CharField(max_length=20, verbose_name="عرصه ملک")
-    melk_price = django.db.models.CharField(max_length=50, verbose_name="ارزش ریالی ملک")
-    melk_ayan = django.db.models.CharField(max_length=20, verbose_name="اعیان ملک")
+    melk_year = django.db.models.DateField(verbose_name="سال واگذاری ملک")
+    melk_arseh = django.db.models.CharField(max_length=10, verbose_name="عرصه ملک")
+    melk_price = django.db.models.CharField(max_length=20, verbose_name="ارزش ریالی ملک")
+    melk_ayan = django.db.models.CharField(max_length=10, verbose_name="اعیان ملک")
     melk_comment = RichTextField(max_length=1000, verbose_name="توضیحات سند ملک")
     melk_pic = django.db.models.FileField(blank=True, null=True, verbose_name="تصویر سند ملک")
     ostan = django.db.models.ForeignKey(Ostan, on_delete=models.SET_NULL, null=True, verbose_name="استان")
-    city = django.db.models.ForeignKey(City, on_delete=models.SET_NULL, null=True, verbose_name="شهرستان")
-    rosta = django.db.models.ForeignKey(Rosta, on_delete=models.SET_NULL, null=True, verbose_name="روستا")
+    city = django.db.models.ForeignKey(City, on_delete=models.SET_NULL, null=True,blank=True, verbose_name="شهرستان")
+    rosta = django.db.models.CharField(max_length=30,verbose_name="روستا") 
     post_code = django.db.models.CharField(max_length=10, verbose_name="کدپستی")
     address = django.db.models.CharField(max_length=200, verbose_name="آدرس ملک")
-    melk_gps = django.db.models.CharField(max_length=100, verbose_name="موقعیت جغرافیایی ملک")
-    
+    #melk_gps = django.db.models.CharField(max_length=100, verbose_name="موقعیت جغرافیایی ملک")
+    melk_gps = django.db.models.CharField(max_length=10, verbose_name="موقعیت جغرافیایی ملک")
+    latitude = models.DecimalField(max_digits=20, decimal_places=17, null=True, verbose_name="طول جغرافیایی")
+    longitude = models.DecimalField(max_digits=20, decimal_places=17, null=True, verbose_name="عرض جغرافیایی")
     
     class Meta:
         verbose_name = 'ملک'
@@ -131,3 +133,5 @@ class Melk(django.db.models.Model):
     def get_absolute_url(self):
         return reverse("core:melk_insert", kwargs={})
 
+    def __repr__(self):
+        return str(self.melk_year)

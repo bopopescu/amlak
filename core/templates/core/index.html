@@ -1,4 +1,5 @@
 {% load static %}
+{% load leaflet_tags %}
 <!DOCTYPE html>
 <html>
   <head>
@@ -6,22 +7,26 @@
     <meta charset="utf-8">
     <meta content="ie=edge" http-equiv="x-ua-compatible">
     <meta content="template language" name="keywords">
+    
     {% comment %} <meta content="Tamerlan Soziev" name="author">
     <meta content="Admin dashboard html template" name="description">
     <meta content="width=device-width, initial-scale=1" name="viewport">{% endcomment %}
     {% comment %} <link href=" //cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css"> {% endcomment %}
     {% comment %} <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css"> {% endcomment %}
-    <link href="favicon.png" rel="shortcut icon">
-    <link href="apple-touch-icon.png" rel="apple-touch-icon"> 
+    <link href="{% static 'ico/favicon.png'%}" rel="shortcut icon">
+    
+    <link href="{% static 'ico/apple-touch-icon.png'%}" rel="apple-touch-icon"> 
     <link href="{% static 'bower_components/bootstrap-daterangepicker/daterangepicker.css'%}" rel="stylesheet">
     <link href="{% static 'bower_components/dropzone/dist/dropzone.css'%}" rel="stylesheet">
     <link href="{% static 'bower_components/datatables.net-bs/css/dataTables.bootstrap.css'%}" rel="stylesheet"> 
-    <link href="{% static '/bower_components/fullcalendar/dist/fullcalendar.min.css'%}" rel="stylesheet">
+    <link href="{% static 'bower_components/fullcalendar/dist/fullcalendar.min.css'%}" rel="stylesheet">
     <link href="{% static 'bower_components/perfect-scrollbar/css/perfect-scrollbar.min.css'%}" rel="stylesheet">
     <link href="{% static 'bower_components/slick-carousel/slick/slick.css'%}" rel="stylesheet">
     <link href="{% static 'css/main.css'%}" rel="stylesheet"> 
     {% comment %} <link href="{% static 'css/dashicons.css'%}" rel="stylesheet">  {% endcomment %}
-    
+    <link href="{% static 'js/admin/jquery.ui.datepicker.jalali/themes/base/jquery-ui.min.css'%}" type="text/css" media="all" rel="stylesheet">
+    {% leaflet_js %}
+    {% leaflet_css %}
   </head>
   <body class="menu-position-side menu-side-left full-screen with-content-panel">
 
@@ -311,7 +316,7 @@
       </div>
       
     </div>
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
     {% comment %} <script type="text/javascript" src="DataTables/datatables.min.js"></script> {% endcomment %}
     {% comment %} <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
@@ -324,7 +329,7 @@
     {% comment %} <script src='https://api.mapbox.com/mapbox-gl-js/v1.3.1/mapbox-gl.js'></script> {% endcomment %}
     <script src="{% static 'bower_components/popper.js/dist/umd/popper.min.js'%}"></script>
     <script src="{% static '/bower_components/jquery/dist/jquery.min.js'%}"></script>
-    
+    <script src="{% static 'js/main.js'%}"></script>
     <script src="{% static 'bower_components/moment/moment.js'%}"></script>
     <script src="{% static 'bower_components/chart.js/dist/Chart.min.js'%}"></script>
     <script src="{% static 'bower_components/select2/dist/js/select2.full.min.js'%}"></script>
@@ -353,72 +358,124 @@
     <script src="{% static 'bower_components/bootstrap/js/dist/tab.js'%}"></script>
     <script src="{% static 'bower_components/bootstrap/js/dist/tooltip.js'%}"></script>
     <script src="{% static 'bower_components/bootstrap/js/dist/popover.js'%}"></script>
+    {% comment %} <script src="{% static 'admin/js/django_jalali.min.js' %}"></script>   {% endcomment %}
+    <script src="{% static 'js/admin/main_jalali.js'%}"></script>
+    {% comment %} <script type="text/javascript" src="{% static 'js/admin/jquery.ui.datepicker.jalali/scripts/jquery-1.10.2.min.js'%}"></script> {% endcomment %}
+    <script src="{% static 'js/admin/jquery.ui.datepicker.jalali/scripts/jquery.ui.core.js' %}"></script>
+    
+    <script type="text/javascript" src="{% static 'js/admin/jquery.ui.datepicker.jalali/scripts/jquery.ui.datepicker-cc.js'%}"></script>
+    <script type="text/javascript" src="{% static 'js/admin/jquery.ui.datepicker.jalali/scripts/calendar.js'%}"></script>
+    <script type="text/javascript" src="{% static 'js/admin/jquery.ui.datepicker.jalali/scripts/jquery.ui.datepicker-cc-fa.js'%}"></script>
+    <script src="{% static 'js/city.js' %}"></script>
     <script src="{% static 'js/demo_customizer.js'%}"></script>
-    <script src="{% static '/js/main.js'%}"></script>
-    
+   
+    {% comment %} <script src="{% static 'js/dist/ir-city-select.js'%}"></script> {% endcomment %}
+    <script src="{% static 'js/moneyformat.js'%}"></script>
+    <script type="text/javascript">
+      $('.money').simpleMoneyFormat();
+    </script>
 
-    
-    {% comment %} <script>
-      $(document).ready(function(){
-        $("#myInput").on("keyup", function() {
-          var value = $(this).val().toLowerCase();
-          $("#myTable tr").filter(function() {
-            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-          });
-        });
-      });
-    </script> {% endcomment %}
 
-{% comment %} <script>
 
-  $(document).ready(function () {
-  $("#example").DataTable({      
+<script type="text/javascript">
 
-    autoFill: true,
-    fixedColumns: true,
-    responsive: true,
-  })
-    
+  function map_init_basic (map, options) {
+      
+        
+    var theMarker = {};
 
+    map.on('click',function(e){
+      lat = e.latlng.lat;
+      lon = e.latlng.lng;
+
+      console.log("You clicked the map at LAT: "+ lat+" and LONG: "+lon );
+          //Clear existing marker, 
+
+      if (theMarker != undefined) {
+            map.removeLayer(theMarker);
+        };
+
+  //Add a marker to show where you clicked.
+    theMarker = L.marker([lat,lon]).addTo(map);  
+    //$("#id_melk_gps").val(e.latlng.lat+','+ e.latlng.lng);
+    $("#id_latitude").val(e.latlng.lat);
+    $("#id_longitude").val(e.latlng.lng);
   });
 
-
-</script>  {% endcomment %}
-<script>
-
-  $(function() {
-    $("select#ostan").change(function() {
-      if ($(this).val() == 'Z') {
-        $("select#model").html("<option>Select a model</option>");
-        $("select#model").attr('disabled', true);
-        }
-      else {
-        var url = "brand/" + $(this).val() + "/all_json_models";
-        var brand = $(this).val();
-        $.getJSON(url, function(models) {
-        var options = '<option value="Z">Select a model</option>';
-      for (var i = 0; i < models.length; i++) {
-      options += '<option value="' + models[i].pk + '">' + models[i].fields['description'] + '</option>';
-      }
-      $("select#model").html(options);
-      $("select#model option:first").attr('selected', 'selected');
-      $("select#model").attr('disabled', false);
-      });
-      }
-      });
-
-
-      $("select#model").change(function(vent) {
-      if ($(this).val() == -1) {
-      return;
-      }
-      myAwesomeFunctionToCallWhenAModelIsSelected();
-      });
-});
+         
 }
 
+ 
+     
 </script>
-    
+
+        
+
+
+        {% comment %} C:\Users\Zamani\Desktop\Project python\amlak2\core\static\js\dist {% endcomment %}
+
+        
+        {% comment %} <script>
+          $(document).ready(function(){
+            $("#myInput").on("keyup", function() {
+              var value = $(this).val().toLowerCase();
+              $("#myTable tr").filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+              });
+            });
+          });
+        </script> {% endcomment %}
+
+    {% comment %} <script>
+
+      $(document).ready(function () {
+      $("#example").DataTable({      
+
+        autoFill: true,
+        fixedColumns: true,
+        responsive: true,
+      })
+        
+
+      });
+
+
+    </script>  {% endcomment %}
+    {% comment %} <script>
+
+      $(function() {
+        $("select#ostan").change(function() {
+          if ($(this).val() == 'Z') {
+            $("select#model").html("<option>Select a model</option>");
+            $("select#model").attr('disabled', true);
+            }
+          else {
+            var url = "brand/" + $(this).val() + "/all_json_models";
+            var brand = $(this).val();
+            $.getJSON(url, function(models) {
+            var options = '<option value="Z">Select a model</option>';
+          for (var i = 0; i < models.length; i++) {
+          options += '<option value="' + models[i].pk + '">' + models[i].fields['description'] + '</option>';
+          }
+          $("select#model").html(options);
+          $("select#model option:first").attr('selected', 'selected');
+          $("select#model").attr('disabled', false);
+          });
+          }
+          });
+
+
+          $("select#model").change(function(vent) {
+          if ($(this).val() == -1) {
+          return;
+          }
+          myAwesomeFunctionToCallWhenAModelIsSelected();
+          });
+    });
+    }
+
+    </script> {% endcomment %}
+        
 
   </body>
   </html>

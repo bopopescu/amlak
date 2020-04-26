@@ -65,7 +65,7 @@ class Migration(migrations.Migration):
                 ('melk_gps', models.CharField(max_length=100, verbose_name='موقعیت جغرافیایی ملک')),
                 ('city', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='core.City', verbose_name='شهرستان')),
                 ('ostan', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='core.Ostan', verbose_name='استان')),
-                ('rosta', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='core.Rosta', verbose_name='روستا')),
+               
             ],
         ),
         migrations.AddField(

@@ -1,11 +1,19 @@
 {% extends 'core/index.html' %}
+{% load leaflet_tags %}
 {%block content%}
 {% load bootstrap4 %}
 {% load static %}
 {%load crispy_forms_tags%}
-{% load jformat %}
-
+{% load jalali_tags %}
+{% comment %} {% load jformat %} {% endcomment %}
+{% comment %} {% load djmoney %}
+{% money_localize money %} {% endcomment %}
+{% load humanize %}
 {% comment %} <div class="content-i"> {% endcomment %}
+
+
+
+
     <div class="element-wrapper">
         <div class="element-box">
             {% include "core/message.html" %}
@@ -92,19 +100,20 @@
                         <div class="step-content" id="stepContent2">
                             <div class="row">
                                 <div class="col-sm-6">
-                                    <div class="date-input">
-                                        <label for=""> سال واگذاری ملک</label>
-                                        {% comment %} <img class="ui-datepicker-trigger" src="/static/admin/jquery.ui.datepicker.jalali/themes/base/images/icon-calendar.svg" alt="..." title="...">  {% endcomment %}
+                                    {% comment %} <div class="date-input"> {% endcomment %}
+                                        <label class="required" for="id_melk_year">  سال واگذاری ملک</label>
+                                        {% comment %} <img class="ui-datepicker-trigger" src="{% static 'admin/jquery.ui.datepicker.jalali/themes/base/images/icon-calendar.svg'%}" alt="..." title="..."> {% endcomment %}
+                                        {% comment %} <input type="data" class="form-control"> {% endcomment %}
                                         {{form.melk_year}}
-                                        
+                                       
 
-                                        {% comment %} <input class="form-control" placeholder="سال واگذاری" type="text"> {% endcomment %}
-                                    </div>
+                                        
+                                    {% comment %} </div> {% endcomment %}
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label for="">ارزش ریالی ملک</label>
-                                        {{form.melk_price}}
+                                        {{form.melk_price }}
                                         {% comment %} <input class="form-control" placeholder="ارزش ریالی" type="number"> {% endcomment %}
                                     </div>
                                 </div>
@@ -159,32 +168,39 @@
                             </div>
                         </div>
 
-                        <div class="step-content" id="stepContent3">
+                        <div class="step-content " id="stepContent3">
 
 
-                            <div class="row">
+                            <div class="ir-select row">
                                 <div class="col-sm-6">
-                                    <div class="form-group" >
+                                    <div class="form-group " >
                                         <label for=""> استان</label>
-                                        {% comment %} <select class="form-control" >
-                                            {% for ostan in ostans %}
+                                        {% comment %} <select class="form-control ir-province" name="ostan" > 
+                                        {% comment %} {% if form.id_ostan.errors %}
+                                            <ol>
+                                            {% for error in form.id_ostan.errors %}
+                                                <li><strong>{{ error|escape }}</strong></li>
+                                            {% endfor %}
+                                            </ol>
+                                        {% endif %} {% endcomment %}
+                                            {% comment %} {% for ostan in ostans %}
                                                 <option value="{{ ostan.pk }}">{{ ostan.name}}</option>
-                                            {% endfor%}
-                                        </select> {% endcomment %}
-                                         {{form.ostan}} 
+                                            {% endfor%} 
+                                        </select> {% endcomment %}  
+                                         {{form.ostan}}  
 
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label for=""> شهرستان</label>
-                                        {% comment %} <select class="form-control" >
-                                            {% for city in cities %}
+                                        {% comment %} <select class="form-control ir-city" name="city">
+                                            {% comment %} {% for city in cities %}
                                             <option value="{{ city.pk}}">{{ city.name }}</option>
-                                            {% endfor %}
-                                        </select> {% endcomment %}
+                                            {% endfor %}  
+                                        </select>  {% endcomment %}
 
-                                            {{form.city}} 
+                                           {{form.city}}  
 
                                     </div>
                                 </div>
@@ -194,7 +210,7 @@
                                     <div class="form-group">
                                         <label for=""> نام دهستان / روستا</label>
                                         {% comment %} <select class="form-control" >
-                                            {% for rosta in rostas %}
+                                            {% for rosta in rosta %}
                                                 <option value="{{ rosta.pk }}">{{ rosta.name}}</option>
                                             {% endfor%}
                                         </select> {% endcomment %}
@@ -215,33 +231,32 @@
                             <div class="element-box">
                                 <h5 class="form-header">
                                     بارگزاری نقشه جغرافیایی سند
-                                </h5>
-
-                                {{form.melk_gps}}
+                                </h5> 
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <div class="form-group">
+                                    {% comment %} <input id="id_melk_gps" class ='form-control' autocomplete= 'off' > {% endcomment %}
+                                            <label for="">  منطقه جغرافیایی:</label>
+                                            {{form.melk_gps}}
+                                        </div>
+                                    </div> 
+                                    <div class="col-sm-3">
+                                        <div class="form-group">
+                                            <label for="">  طول جغرافیایی:</label>
+                                            {{form.latitude}}
+                                        </div>
+                                    </div> 
+                                    <div class="col-sm-3">
+                                        <div class="form-group">
+                                            <label for="">  عرض جغرافیایی:</label>
+                                            {{form.longitude}}
+                                        </div>
+                                    </div>
+                                </div>
+                                {% leaflet_map "map" callback="window.map_init_basic"  %} 
                             </div>
-
-
-                            <div>
-
-
-
-
-
-
-
- 
-
-                            {% comment %} <input type="file" name="myfile">
-                             <div id='map' style='width: 400px; height: 300px;'></div>
-                <script>
-                    mapboxgl.accessToken = {{ mapbox_access_token }};
-                    var map = new mapboxgl.Map({
-                    container: 'map',
-                    style: 'mapbox://styles/mapbox/streets-v10',
-                    center: [-77.03, 38.91],
-                    zoom: 9
-                    });   
-                </script> {% endcomment %}
+                        <div>
+                          
                             <div class="form-buttons-w text-right">
                                 <button class="btn btn-primary">ثبت اطلاعات</button>
                             </div>
